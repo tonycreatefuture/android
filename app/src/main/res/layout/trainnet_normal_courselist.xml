@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/trainnet_base_searchtitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_max_height"
+        android:layout_alignParentTop="true" />
+
+    <LinearLayout
+        android:id="@+id/ll_courselist"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/include_title"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_course_parent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:textColor="@color/pure_black"
+            android:textSize="18sp"></TextView>
+
+        <View
+            android:layout_width="1dip"
+            android:layout_height="30dip"
+            android:layout_gravity="center_vertical"
+            android:background="@color/pure_black"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp" />
+
+        <TextView
+            android:id="@+id/tv_course_child"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:clickable="true"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:textColor="@color/pure_black"
+            android:textSize="18sp"></TextView>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/course_line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/ll_courselist"
+        android:background="@color/light_dark_gray" />
+
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+    <!--android:id="@+id/id_swipe_ly"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_below="@+id/line2">-->
+
+    <ListView
+        android:id="@+id/listview_course"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/course_line2"
+        android:background="@color/white"></ListView>
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
+</RelativeLayout>

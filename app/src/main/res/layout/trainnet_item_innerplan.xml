@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/innerPlanLineDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:text="@string/search"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="18sp" />
+
+    <!--分割线-->
+    <View
+        android:id="@+id/innerPlanLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="2dp"
+        android:layout_toRightOf="@+id/innerPlanLineDesc"
+        android:background="@color/black" />
+</RelativeLayout>

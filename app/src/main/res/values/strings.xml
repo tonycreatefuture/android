@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SVW移动培训</string>
+    <string name="soft_update_info">软件更新</string>
+    <string name="soft_update_updateBtn">现在更新</string>
+    <string name="soft_update_later">稍后更新</string>
+    <string name="soft_updating">正在更新</string>
+    <string name="soft_update_cancel">取消更新</string>
+    <string name="username">  请输入用户名</string>
+    <string name="password">  请输入密码</string>
+    <string name="login">登 录</string>
+    <string name="s_view_btn">进入考试</string>
+    <string name="submitPaper">交卷</string>
+    <string name="progressQuery">进度查询</string>
+    <string name="paperTitle">考试标题</string>
+    <string name="OK">确定</string>
+    <string name="Cancel">取消</string>
+    <string name="Continue">继续</string>
+    <string name="submitPaperInfo">您已成功提交试卷</string>
+    <string name="s_view_submit">提交试卷</string>
+    <string name="lastQuestion">上一题</string>
+    <string name="nextQuestion">下一题</string>
+    <string name="apptitle">上海大众网络培训系统</string>
+    <string name="loginout">注销</string>
+    <string name="returntrainnet">返回</string>
+    <string name="testcenter">考试中心</string>
+    <string name="welcome">欢迎您,考生姓名</string>
+    <string name="runningtest">正在进行的考试</string>
+    <string name="preparedtest">即将进行的考试</string>
+    <string name="finishedtest">已经完成的考试</string>
+    <string name="notest">暂无考试</string>
+    <string name="starttime">开考时间</string>
+    <string name="endtime">结束时间</string>
+    <string name="testduration">考试时长</string>
+    <string name="returntestcenter">返回考试中心</string>
+    <string name="testknow">考试须知</string>
+    <string name="scorestat">成绩统计</string>
+    <string name="userinfo">学员信息</string>
+    <string name="resultdetail">答题明细</string>
+
+    <string name="company_cn">上    汽    大    众</string>
+    <string name="company_en">SAIC VOLKSWAGEN</string>
+    <string name="login_tip">PLEASE LOG IN</string>
+    <string name="scan_text">将二维码放入框内, 即可自动扫描</string>
+    <string name="menu_home">首页</string>
+    <string name="menu_function">常用功能</string>
+    <string name="menu_scan">扫一扫</string>
+    <string name="menu_train">培训</string>
+    <string name="menu_moreservice">更多</string>
+    <string name="title_trainonline">在线培训</string>
+    <string name="title_traininner">内部培训</string>
+    <string name="title_innerplan">执行中▼</string>
+    <string name="title_innerplan_dispatch">人员安排</string>
+    <string name="title_innerplan_createupdate">新建/编辑计划</string>
+    <string name="title_innerplan_summary">编辑小结</string>
+    <string name="title_innerplan_viewsummary">查看小结</string>
+    <string name="title_innerplan_score">成绩管理</string>
+    <string name="title_trainnettest">网上考试</string>
+    <string name="title_trainextra">辅导培训</string>
+    <string name="title_extraplan">辅导计划</string>
+    <string name="title_trainnormal">常规培训</string>
+    <string name="title_funcadd">添加常用</string>
+    <string name="title_newscontent">新闻详情</string>
+    <string name="title_imagescontent">新闻详情</string>
+    <string name="title_tvcontent">SVW-TV</string>
+    <string name="title_normalcourselist">课程清单</string>
+    <string name="title_normalapply">培训申请</string>
+    <string name="title_normalcallback">培训确认回执</string>
+    <string name="title_normalscore">常规培训成绩</string>
+    <string name="title_evaluationpaper">培训评估</string>
+    <string name="title_evaluationextrapaper">辅导评估</string>
+    <string name="title_scorefinished">完成的考试</string>
+    <string name="title_scoreunfinished">未通过的考试</string>
+    <string name="title_settings">个人设置</string>
+    <string name="title_systeminfo">系统信息</string>
+    <string name="title_aboutus">关于我们</string>
+    <string name="title_normalplan">常规计划</string>
+    <string name="title_normalconfirmapply">确认申请</string>
+    <string name="title_awaitstudy">待学习</string>
+    <string name="title_awaitconfirm">待确认</string>
+    <string name="title_awaitaudit">待审核</string>
+    <string name="title_awaitevaluate">待评估</string>
+    <string name="title_confirmcontent">确认详情</string>
+    <string name="title_testwebservice">测试接口</string>
+    <string name="scan_pic">扫描二维码</string>
+    <string name="pic">图片</string>
+    <string name="news">新闻公告</string>
+    <string name="save">完成</string>
+    <string name="course_content">课程简介 Trainning Content</string>
+    <string name="course_target">课程目标  Learning Objectives</string>
+    <string name="course_overview">课程大纲 Content Overview</string>
+    <string name="course_format">教学形式 Trainning Format</string>
+    <string name="course_days">课时天数 Session Days</string>
+    <string name="course_position">培训对象 SuitablePositions</string>
+    <string name="course_director">课程主管 Director</string>
+    <string name="course_contact">联系方式 Contact</string>
+    <string name="course_remark">备注 Remark</string>
+    <string name="course_apply">申请课程</string>
+    <string name="course_teacher">教师 Teacher</string>
+    <string name="course_startdate">开始日期 StartDate</string>
+    <string name="course_enddate">结束日期 EndDate</string>
+    <string name="course_placename">地点 Place</string>
+    <string name="course_classname">教室 Class</string>
+    <string name="course_address">地址 Address</string>
+    <string name="course_linkman">联系人 LinkMan</string>
+    <string name="course_route">路线 Route</string>
+    <string name="course_hotel">酒店 Hotel</string>
+    <string name="confirmapplyresult">确认结果</string>
+    <string name="course_callback">确认回执</string>
+    <string name="course_callbacked">已回执</string>
+
+    <string name="gpsfollow">追随</string>
+    <string name="gpslocate">定位</string>
+    <string name="gpsrotate">旋转</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
+    <string name="detail">详情</string>
+    <string name="trainschedule">培训日程</string>
+    <string name="number">0</string>
+    <string name="need_audit">待审核</string>
+
+    <!--train type-->
+    <string name="Normal">Normal</string>
+    <string name="Special">Special</string>
+    <string name="Internal">Internal</string>
+
+    <!--service constant-->
+    <string name="SoapObjectTypeName">org.ksoap2.serialization.SoapObject</string>
+    <string name="ReturnCode">ReturnCode</string>
+    <string name="Message">Message</string>
+    <string name="Result">Result</string>
+    <string name="LoginCode">98</string>
+    <string name="LoginMessage">用户名不能为空！</string>
+    <string name="NetCode">99</string>
+    <string name="NetMessage">网络连接错误！</string>
+    <string name="ServerCode">100</string>
+    <string name="ServerMessage">服务器接口错误！</string>
+
+    <!--trainNormal constant-->
+    <string name="CourseList">课程清单</string>
+    <string name="TrainApply">培训申请</string>
+    <string name="TrainCallBack">发送回执</string>
+    <string name="TrainScore">培训记录</string>
+    <string name="TrainEvaluate">培训评估</string>
+
+    <!--loading constant-->
+    <string name="LoadingLogin">正在登录…</string>
+    <string name="Loading">正在加载…</string>
+    <string name="LoadingUpdate">正在检查更新…</string>
+    <string name="LoadingTest">正在加载考试…</string>
+    <string name="LoadingTestContent">正在加载试题…</string>
+    <string name="LoadingSubmitGrade">正在提交成绩…</string>
+    <string name="LoadingEvaluation">正在加载评估…</string>
+    <string name="LoadingPlanCreate">正在新建内训计划…</string>
+    <string name="LoadingPlanUpdate">正在编辑内训计划…</string>
+    <string name="LoadingPlanDefaultCourse">正在加载默认课程…</string>
+    <string name="LoadingSummary">正在加载小结…</string>
+    <string name="LoadingFiles">正在下载附件%1$s…</string>
+    <string name="FilesFinished">附件%1$s下载完成…</string>
+    <string name="LoadingUpdateScore">正在更新成绩…</string>
+    <string name="LoadingSummaryUpload">正在保存上传…</string>
+    <string name="LoadingCompressFiles">正在压缩附件%1$s…</string>
+    <string name="LoadingUploadFiles">正在上传附件%1$s…</string>
+    <string name="UploadFilesFinished">上传附件%1$s完成…</string>
+    <string name="LoadingDeleteFiles">正在删除附件%1$s…</string>
+    <string name="DeleteFilesFinished">删除附件%1$s完成…</string>
+    <string name="LoadingExtraPlan">正在加载辅导计划…</string>
+    <string name="LoadingEvaluate">正在提交评估…</string>
+    <string name="LoadingImage">正在上传图片…</string>
+
+    <!--study state-->
+    <string name="NeedAudit">您提交的申\n请正在审核\n安排，请耐\n心等待</string>
+    <string name="NeedStudy">线上学习记得抓紧哦</string>
+    <string name="NeedConfirm">收到培训通知，\n吱一声</string>
+    <string name="NeedEvaluate">培训结束了\n点个赞…</string>
+    <string name="EvaluateDesc">*暂请移步到Vtraining微信或培训网进行评估。</string>
+
+    <!--course list-->
+    <string name="CoursePId">CoursePId</string>
+    <string name="CourseCIdTitle">CourseCIdTitle</string>
+    <string name="CourseCIdNo">CourseCIdNo</string>
+    <string name="CourseCIdContent">CourseCIdContent</string>
+    <string name="CourseIdName">CourseIdName</string>
+    <string name="CourseRootId">CourseRootId</string>
+    <string name="CourseTypeId">CourseTypeId</string>
+
+    <string name="MCoursePId">MCoursePId</string>
+    <string name="MCourseCIdTitle">MCourseCIdTitle</string>
+    <string name="MCourseCIdNo">MCourseCIdNo</string>
+    <string name="MCourseCIdContent">MCourseCIdContent</string>
+    <string name="MCourseIdName">MCourseIdName</string>
+    <string name="MCourseRootId">MCourseRootId</string>
+    <string name="MCourseTypeId">MCourseTypeId</string>
+
+    <!--moreService-->
+    <string name="PersonSettings">个人设置</string>
+    <string name="UserInfo">【账号信息】</string>
+    <string name="MyPhoto">设置头像</string>
+    <string name="DealerInfo">【经销商信息】</string>
+    <string name="Idcard">【身份证号码】</string>
+    <string name="Post">【岗位】</string>
+    <string name="SvwStar">【V-Star】</string>
+    <string name="CellNumber">手机号：</string>
+    <string name="Email">邮箱：</string>
+    <string name="InWork">在职：</string>
+    <string name="MembershipLevel">会员级别：</string>
+    <string name="Evaluation">测评情况：</string>
+    <string name="TrainLevel">培训等级：</string>
+    <string name="CertifiedStatus">认证情况：</string>
+    <string name="Qualification">资质级别：</string>
+    <string name="IntegrationDate">上一期已发放积分日期：</string>
+    <string name="BeforeAssessment">上一期已发放积分（元）：</string>
+    <string name="AfterAssessment">考核后积分（元）：</string>
+    <string name="Tax">税金：</string>
+    <string name="ManagementFee">管理费：</string>
+    <string name="ActualPayment">实际发放（元）：</string>
+    <string name="AllPeople">人员奖励情况</string>
+    <string name="SystemInfo">系统信息</string>
+    <string name="AboutUs">关于我们</string>
+    <string name="VersionInfo">软件版本： %1$s</string>
+    <string name="VersionDesc">版权所有</string>
+    <string name="VersionDescContent">上汽大众</string>
+    <string name="WebSite">官方网站</string>
+    <string name="WebSiteContent">svwtrainnet.csvw.com</string>
+    <string name="WeChat">官方微信</string>
+    <string name="WeChatContent">svw-vtraining</string>
+    <string name="SharedApp">分享APP</string>
+    <string name="TechSupport">技术支持</string>
+    <string name="ContactPhone">联系电话</string>
+    <string name="ContactPhoneContent">021&#8211;62457482，62456267</string>
+    <string name="WorkTime">工作时间</string>
+    <string name="WorkTimeContent">法定工作日8:30~17:30</string>
+    <string name="QR">问题反馈</string>
+    <string name="QRContent">service@zhongdasoft.com</string>
+    <string name="QA">百问百答</string>
+    <string name="QAContent">></string>
+
+    <!--train constant-->
+    <string name="TrainOnline">在线培训</string>
+    <string name="TrainInner">内部培训</string>
+    <string name="InnerPlan">内训计划</string>
+    <string name="InnerPlanCreateUpdate">新建/编辑计划</string>
+    <string name="TrainNetTest">网上考试</string>
+    <string name="TrainExtra">辅导培训</string>
+    <string name="ExtraPlan">辅导计划</string>
+    <string name="TrainNormal">常规培训</string>
+    <string name="OnlineTv">SVW-TV</string>
+    <string name="FuncAdd">添加项目</string>
+    <string name="ConfirmApply">确认回执</string>
+    <string name="PassedCourse">通过的考试</string>
+    <string name="UnPassedCourse">没有完成的考试</string>
+    <string name="ApplyCourse">申请课程</string>
+    <string name="calendar">培训日程</string>
+
+    <string name="QAUrl">app/pages/faq/faqtypelist.aspx?token=%1$s</string>
+    <!--&amp;showAttach=1-->
+    <string name="NewsUrl">app/pages/news.aspx?articleId=%2$s&amp;token=%1$s&amp;showAttach=1</string>
+    <string name="Api">api.asmx</string>
+    <string name="DBPath">ExamOnline/Exam/exportpaper.ashx?paperId=%1$s</string>
+    <string name="SummariesUrl">UploadFiles/Summaries/%1$s</string>
+    <string name="PaymentUrl">app/pages/svwstar.aspx?token=%1$s</string>
+    <string name="RegisterUrl">http://download.zhongdasoft.com/TiguanL/Schedule.aspx?id=%1$s</string>
+
+    <string name="searchCourse">输入课程名称</string>
+    <string name="search">搜索</string>
+    <string name="copyFinished">已复制</string>
+    <string name="iKnow">知道了</string>
+    <string name="noData">暂无图片</string>
+
+    <string name="testQuestion">题数</string>
+    <string name="testScore">总分</string>
+    <string name="testTime">考试时长</string>
+    <string name="testBegin">开始考试</string>
+
+    <string name="testSingle">单选题</string>
+    <string name="testMulti">多选题</string>
+    <string name="testJudge">判断题</string>
+    <string name="testReturn">返回考试中心</string>
+    <string name="no_runningTest">当前暂无正在进行的考试哦~</string>
+    <string name="no_finishedTest">当前没有已经完成的考试哦~</string>
+
+    <string name="CourseStartAndEndTime">培训时间</string>
+    <string name="CoursePlace">培训地点</string>
+    <string name="Director">教师</string>
+    <string name="notWifiTv">您正使用手机流量上网，浏览视频将会消耗您的手机流量</string>
+    <string name="notWifiMap">您正使用手机流量上网，搜索地图将会消耗您的手机流量</string>
+    <string name="submitScore">请点击此处提交成绩</string>
+    <string name="tips">温馨提示</string>
+    <string name="AllowSdcard">请允许应用对SD卡进行读写操作</string>
+    <string name="sdCardTips">您没有允许读写sd卡，后续操作将不能执行</string>
+    <string name="Sdcard">SD卡不存在，或者SD卡没有读写权限</string>
+    <string name="storeManual">请参照上汽大众培训网手机版2.0上线通知，设置应用的存储权限。</string>
+    <string name="ParentNode">ParentNode</string>
+    <string name="loginByOtherDevice">账号在其他设备登录，请重新登录</string>
+    <string name="refreshByNetError">网络连接错误，刷新失败</string>
+    <string name="showByNetError">网络连接错误，加载数据失败</string>
+    <string name="submitRating">由于网络错误，评论已保存，等待网络正常时再提交</string>
+    <string name="evaluationID">evaluationID</string>
+    <string name="evaluationSubmit">请点击此处提交评估</string>
+    <string name="submitEvaluation">您已成功提交评估</string>
+
+    <string name="hintDate1">开始日期</string>
+    <string name="hintDate2">结束日期</string>
+    <string name="hintCourse">请选择培训课程</string>
+    <string name="hintDispatch">按照姓名搜索</string>
+    <string name="hintSummary">请填写小结</string>
+    <string name="HeadPlan">总部内训</string>
+    <string name="AutoPlan">自主内训</string>
+    <string name="PlanType">计划类型</string>
+    <string name="PlanDate">培训日期</string>
+    <string name="PlanCourse">培训课程</string>
+    <string name="PlanCourseDesc">培训主题</string>
+    <string name="PlanTerm">培训期次</string>
+    <string name="PlanNum">培训人数</string>
+    <string name="PlanTeacher">培训老师</string>
+    <string name="dateSpan">至</string>
+    <string name="PlanPublished">发布该计划</string>
+    <string name="input_num_character">0123456789</string>
+    <string name="summaryMaxLength">1000</string>
+    <string name="all">全部</string>
+    <string name="TraineeScore">成绩</string>
+    <string name="TraineeCertificate">证书编号</string>
+    <string name="TraineeAttend">出勤情况</string>
+    <string name="TraineeRating">考核评定</string>
+    <string name="PlanSummary">小结</string>
+    <string name="PlanUpload">上传照片</string>
+    <string name="saveAndUpload">保存并上传</string>
+    <string name="UploadDesc">1、上传文件时，请注意(1).附件只支持图片(jpg,gif,png,bmp),文档(doc,docx,xls,xlsx,ppt,pptx),压缩文件(zip,rar)(2).文件大小不要超过500K(3)文件名只能使用数字，字母或汉字\n2、编辑小结内容时，为避免出错，请按如下方式之一操作：(1).如果使用word编辑小结，请先复制到记事本，再从记事本复制到文本框(2).直接在文本框中输入小结(3).小结内容不少于10个字符</string>
+    <string name="title_uploadfile">上传文件</string>
+    <string name="fileType">fileType</string>
+    <string name="fileName">fileName</string>
+    <string name="filePath">filePath</string>
+    <string name="attachId">attachId</string>
+    <string name="uploadFileSize">512000</string>
+    <string name="CAMERA_REQUEST_CODE">100</string>
+    <string name="SELECT_PICTURE_CODE">101</string>
+    <string name="UPLOAD_IMAGE_REQUEST_CODE">200</string>
+    <string name="UPLOAD_OTHER_REQUEST_CODE">201</string>
+    <string name="errPlanNumMore">安排人数大于计划人数，请检查</string>
+    <string name="errPlanNumZero">选择的安排或取消安排人数为零，请检查</string>
+    <string name="dropDown">▼</string>
+    <string name="dropUp">▲</string>innerTrainer
+    <string name="notInnerTrainer">您不是内训师，没有进入内训计划的权限</string>
+    <string name="noChanged">您没有修改内容，不需要保存</string>
+    <string name="downloadPath">/download/</string>
+    <string name="position">position</string>
+    <string name="key">key</string>
+    <string name="summaryWords">%1$s/1000字</string>
+    <string name="errFileSize">文件大小不能超过500K</string>
+    <string name="errFileExist">该文件已经在上传列表中</string>
+    <string name="errFileSymbol">文件名不能包含以下符号 ?,\\,/,*,:,\",&lt;,&gt;,|</string>
+    <string name="errFileSpace">该文件已经在上传列表中</string>
+    <string name="errPlanSubmit1">小结内容不能少于10个字符!</string>
+    <string name="errPlanSubmit2">必须包含附件!</string>
+    <string name="errPlanSubmit3">尚无参训人员,不能提交!</string>
+
+    <string name="depart">出发</string>
+    <string name="plus">+</string>
+
+    <string name="no_offLineEvaluating">当前暂无线下课程评估哦~</string>
+    <string name="no_extraEvaluating">当前暂无辅导课程评估哦~</string>
+
+    <string name="no_notFinishedExtraPlan">当前暂无未完成的辅导计划哦~</string>
+    <string name="no_finishedExtraPlan">当前暂无已完成的辅导计划哦~</string>
+    <string name="innerPlanQuery">0,2,2,</string>
+    <string name="innerCourseExpired1">该课程已结束！</string>
+    <string name="innerCourseExpired2">该课程要求完成日期：%1$s</string>
+    <string name="showDetail"><u>详情</u></string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_login_after">LoginAfterActivity</string>
+    <string name="course_register">行程登记</string>
+    <string name="selectCourse">选课</string>
+    <string name="studyProgress">学习</string>
+    <string name="extraDetail">辅导计划详情</string>
+
+    <string name="xmlPrefix">&lt;?xml version=\"1.0\" encoding=\"utf-8\"?&gt;&lt;soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"&gt;&lt;soap:Body&gt;&lt;%1$sResponse xmlns=\"http://svwtrainnet.csvw.com\"&gt;&lt;%1$sResult&gt;</string>
+    <string name="xmlPostfix">&lt;/%1$sResult&gt;&lt;/%1$sResponse&gt;&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</string>
+    <string name="title_activity_chat">消息</string>
+    <string name="title_activity_mychat">我的信息</string>
+    <string name="chatCameraPhoto">拍照</string>
+    <string name="chatImage">图片</string>
+    <string name="OnlinePlay">在线直播</string>
+    <string name="readAll">阅读全文</string>
+    <string name="TrainPlan">教学计划</string>
+    <string name="title_trainplan">教学计划</string>
+    <string name="MethodName">methodName</string>
+    <string name="Meeting">网上直播</string>
+    <string name="title_activity_meeting_play">MeetingPlayActivity</string>
+    <string name="joinMeeting">进入直播</string>
+    <string name="playError">请使用电脑进行学习（观看本次直播）</string>
+    <string name="pleaseInputUserPass">请输入用户名密码</string>
+    <string name="Logout">注销</string>
+    <string name="copy_link">复制链接</string>
+    <string name="shared_app">分享APP</string>
+    <string name="publishedDownloadUrl">http://svwtrainnet.csvw.com/app.aspx</string>
+    <string name="testDownloadUrl">http://download.zhongdasoft.com/test.htm</string>
+</resources>

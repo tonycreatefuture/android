@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/trainnet_base_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_max_height"
+        android:layout_alignParentTop="true" />
+
+    <RelativeLayout
+        android:id="@+id/versionInfo"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@+id/include_title">
+
+        <ImageView
+            android:id="@+id/im_image"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/logo"
+            android:contentDescription="@string/pic"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/im_image"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="@string/VersionInfo"
+            android:textColor="@color/black"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/versionInfo"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/light_gray"
+            android:gravity="left|center_vertical"
+            android:padding="5dp"
+            android:text="@string/AboutUs"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <include
+            android:id="@+id/publish_layout"
+            layout="@layout/trainnet_item_aboutus" />
+
+        <include
+            android:id="@+id/website_layout"
+            layout="@layout/trainnet_item_aboutus" />
+
+        <include
+            android:id="@+id/wechat_layout"
+            layout="@layout/trainnet_item_aboutus" />
+
+        <include
+            android:id="@+id/sharedApp_layout"
+            layout="@layout/trainnet_item_aboutus" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/light_gray"
+            android:gravity="left|center_vertical"
+            android:padding="5dp"
+            android:text="@string/TechSupport"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <include
+            android:id="@+id/phone_layout"
+            layout="@layout/trainnet_item_aboutus" />
+
+        <include
+            android:id="@+id/workTime_layout"
+            layout="@layout/trainnet_item_aboutus" />
+
+        <include
+            android:id="@+id/qr_layout"
+            layout="@layout/trainnet_item_aboutus" />
+
+        <include
+            android:id="@+id/qa_layout"
+            layout="@layout/trainnet_item_aboutus" />
+    </LinearLayout>
+</RelativeLayout>

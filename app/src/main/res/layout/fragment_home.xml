@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/id_swipe_ly"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- 内容区域 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!-- picture news -->
+                <RelativeLayout
+                    android:id="@+id/home_body1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
+
+                    <com.zhongdasoft.svwtrainnet.widget.ImageCycleView
+                        android:id="@+id/ad_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+                <!-- train schedule -->
+                <LinearLayout
+                    android:id="@+id/home_body2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.18"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_schedule"
+                        android:layout_width="75dp"
+                        android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:contentDescription="@string/pic"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/trainnet_home_lesson" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_schedule"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical|left"
+                                android:gravity="center_vertical|left"
+                                android:text="@string/trainschedule"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <RelativeLayout
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_gravity="left">
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_alignRight="@+id/lesson_count"
+                                    android:clickable="true"
+                                    android:contentDescription="@string/pic"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/trainnet_home_point1" />
+
+                                <TextView
+                                    android:id="@+id/lesson_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentTop="true"
+                                    android:layout_gravity="center_vertical|left"
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:paddingBottom="1dp"
+                                    android:paddingRight="2dp"
+                                    android:text="@string/number"
+                                    android:textColor="@color/white"
+                                    android:textIsSelectable="false"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/light_dark_gray" />
+
+                        <TextView
+                            android:id="@+id/lesson_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/lesson_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/lesson_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical|left"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:textColor="@color/black" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/dark_light_gray" />
+                <!-- train state -->
+                <LinearLayout
+                    android:id="@+id/home_body3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.24"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <include
+                        android:id="@+id/include_audit"
+                        layout="@layout/trainnet_item_imagecount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="2dp"
+                        android:layout_marginTop="5dp" />
+
+                    <View
+                        android:layout_width="1dip"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/dark_light_gray" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <include
+                            android:id="@+id/include_study"
+                            layout="@layout/trainnet_item_imagecount"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="5dp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dip"
+                            android:background="@color/dark_light_gray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <include
+                                android:id="@+id/include_confirm"
+                                layout="@layout/trainnet_item_imagecount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginTop="5dp" />
+
+                            <View
+                                android:layout_width="1dip"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@color/dark_light_gray" />
+
+                            <include
+                                android:id="@+id/include_evaluate"
+                                layout="@layout/trainnet_item_imagecount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="2dp"
+                                android:layout_marginTop="5dp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:background="@color/dark_light_gray" />
+                <!-- text news -->
+                <LinearLayout
+                    android:id="@+id/home_body4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.18"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/iv_news"
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/trainnet_home_news"
+                        android:contentDescription="@string/pic"
+                        android:scaleType="centerCrop" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <ViewFlipper
+                            android:id="@+id/viewflipper"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:flipInterval="3000"
+                            android:inAnimation="@anim/push_down_in"
+                            android:outAnimation="@anim/push_down_out"
+                            android:persistentDrawingCache="animation"></ViewFlipper>
+
+                        <ImageView
+                            android:id="@+id/iv_news_more"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:clickable="true"
+                            android:contentDescription="@string/pic"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/trainnet_home_morenews" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+        <!-- 左侧抽屉 -->
+        <RelativeLayout
+            android:id="@+id/trainnet_drawer_rightlayout"
+            android:layout_width="@dimen/navigation_max_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="@color/white"
+            android:clickable="true">
+
+            <include
+                android:id="@+id/moresetting"
+                layout="@layout/trainnet_more_settingsnotitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
+
+        <!-- 右侧抽屉 -->
+    </android.support.v4.widget.DrawerLayout>
+</RelativeLayout>

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/gray_white"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/menu_home"
+        android:textColor="@color/black"
+        android:textSize="22sp" />
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/tv_title"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/light_dark_gray" />
+
+    <RelativeLayout
+        android:id="@+id/rl_single"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1">
+
+        <TextView
+            android:id="@+id/tv_single"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testSingle"
+            android:textColor="@color/light_dark_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_singleAll"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_single"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testSingle"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_singleRight"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_singleAll"
+            android:background="@color/green"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_singleRightNum"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_singleRight"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testSingle"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_singleWrong"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_singleRightNum"
+            android:background="@color/red"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_singleWrongNum"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_singleWrong"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testSingle"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_singleScoreInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_singleWrongNum"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testSingle"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/rl_single"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5dp"
+        android:background="@color/light_dark_gray" />
+
+    <RelativeLayout
+        android:id="@+id/rl_multi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line2">
+
+        <TextView
+            android:id="@+id/tv_multi"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testMulti"
+            android:textColor="@color/light_dark_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_multiAll"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_multi"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testMulti"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_multiRight"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_multiAll"
+            android:background="@color/green"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_multiRightNum"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_multiRight"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testMulti"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_multiWrong"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_multiRightNum"
+            android:background="@color/red"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_multiWrongNum"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_multiWrong"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testMulti"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_multiScoreInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_multiWrongNum"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testMulti"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/rl_multi"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5dp"
+        android:background="@color/dark_gray" />
+
+    <RelativeLayout
+        android:id="@+id/rl_judge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line3">
+
+        <TextView
+            android:id="@+id/tv_judge"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testJudge"
+            android:textColor="@color/light_dark_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_judgeAll"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_judge"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testJudge"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_judgeRight"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_judgeAll"
+            android:background="@color/green"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_judgeRightNum"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_judgeRight"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testJudge"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_judgeWrong"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_judgeRightNum"
+            android:background="@color/red"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_judgeWrongNum"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_judgeWrong"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testJudge"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_judgeScoreInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_judgeWrongNum"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/testJudge"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/rl_judge"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="5dp"
+        android:background="@color/light_dark_gray" />
+
+    <TextView
+        android:id="@+id/tv_testReturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line4"
+        android:layout_margin="15dp"
+        android:background="@drawable/nettest_updateborder"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/testReturn"
+        android:textColor="@color/white"
+        android:textSize="24sp" />
+
+</RelativeLayout>

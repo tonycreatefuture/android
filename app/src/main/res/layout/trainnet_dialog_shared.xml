@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_dialog"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/shared_app"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/icon_empty"
+        android:contentDescription="@string/pic"
+        android:padding="8dp"
+        android:scaleType="fitXY" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/iv_image"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:background="@color/dark_gray"
+        android:padding="8dp" />
+
+    <ImageView
+        android:id="@+id/imgSharedLink"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/line"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:background="@drawable/trainnet_sharedlink"
+        android:contentDescription="@string/pic"
+        android:padding="8dp"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/tvSharedLink"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/imgSharedLink"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:text="@string/copy_link"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+</RelativeLayout>

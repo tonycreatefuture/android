@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <!--日期时间信息-->
+    <TextView
+        android:id="@+id/timeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/gray_white"
+        android:gravity="center"
+        android:text="@string/app_name"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="18sp" />
+
+    <!--左边-->
+    <!--头像信息-->
+    <ImageView
+        android:id="@+id/headLeft"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/timeText"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/pic"
+        android:scaleType="centerCrop"
+        android:src="@drawable/chat_head" />
+
+    <!--名字信息-->
+    <TextView
+        android:id="@+id/nameLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeText"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/headLeft"
+        android:gravity="left"
+        android:text="@string/app_name"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="14sp" />
+
+    <!--文本信息-->
+    <TextView
+        android:id="@+id/contentLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameLeft"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/headLeft"
+        android:background="@drawable/nim_message_left_white_bg_pressed"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
+        android:paddingTop="8dp"
+        android:text="@string/app_name"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="16sp" />
+
+    <!--图片信息-->
+    <ImageView
+        android:id="@+id/picLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameLeft"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/headLeft"
+        android:contentDescription="@string/pic"
+        android:scaleType="centerCrop"
+        android:src="@drawable/trainnet_refresh" />
+
+    <!--声音信息-->
+    <TextView
+        android:id="@+id/soundLeft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameLeft"
+        android:layout_margin="5dp"
+        android:layout_toRightOf="@+id/headLeft" />
+
+    <!--右边-->
+    <!--头像信息-->
+    <ImageView
+        android:id="@+id/headRight"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/contentLeft"
+        android:layout_below="@+id/timeText"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/pic"
+        android:scaleType="centerCrop"
+        android:src="@drawable/chat_head" />
+
+    <!--名字信息-->
+    <TextView
+        android:id="@+id/nameRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeText"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/headRight"
+        android:gravity="right"
+        android:text="@string/app_name"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="14sp" />
+
+    <!--文本信息-->
+    <TextView
+        android:id="@+id/contentRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameRight"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/headRight"
+        android:background="@drawable/nim_message_right_blue_bg"
+        android:gravity="center_vertical|center_horizontal"
+        android:paddingBottom="8dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="10dp"
+        android:paddingTop="8dp"
+        android:text="@string/app_name"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="16sp" />
+
+    <!--图片信息-->
+    <ImageView
+        android:id="@+id/picRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameRight"
+        android:layout_margin="5dp"
+        android:layout_toLeftOf="@+id/headRight"
+        android:contentDescription="@string/pic"
+        android:scaleType="centerCrop"
+        android:src="@drawable/trainnet_refresh" />
+
+    <!--声音信息-->
+    <TextView
+        android:id="@+id/soundRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nameRight"
+        android:layout_margin="5dp"
+        android:layout_toLeftOf="@+id/headRight" />
+
+
+</RelativeLayout>

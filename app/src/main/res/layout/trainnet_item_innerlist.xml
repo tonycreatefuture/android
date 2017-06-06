@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <!--标题信息-->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:ellipsize="end"
+        android:gravity="left"
+        android:singleLine="true"
+        android:text="@string/app_name"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="18sp" />
+
+    <!--类型信息-->
+    <TextView
+        android:id="@+id/subTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical|left"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/title"
+        android:text="@string/app_name"
+        android:textColor="@color/deep_gray"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/subTitle"
+        android:gravity="right">
+
+        <ImageView
+            android:id="@+id/img_op1"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:contentDescription="@string/pic"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/img_op2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_op1"
+            android:contentDescription="@string/pic"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/img_op3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/img_op2"
+            android:contentDescription="@string/pic"
+            android:scaleType="centerCrop" />
+    </RelativeLayout>
+    <!--分割线-->
+    <View
+        android:id="@+id/line1"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/title"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/infoDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_gravity="center_vertical|right"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/app_name"
+        android:textColor="@color/light_dark_gray"
+        android:textSize="18sp" />
+
+    <!--分割线-->
+    <View
+        android:id="@+id/line2"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/infoDate"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/rl_infoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line2"
+        android:gravity="left">
+
+        <TextView
+            android:id="@+id/infoTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/app_name"
+            android:textColor="@color/light_dark_gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/infoTitle_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|left"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_toRightOf="@+id/infoTitle"
+            android:background="@drawable/trainnet_inner_border_u"
+            android:padding="3dp"
+            android:text="@string/showDetail"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/line2"
+        android:layout_toRightOf="@+id/rl_infoTitle"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/app_name"
+            android:textColor="@color/light_dark_gray"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <!--分割线-->
+    <View
+        android:id="@+id/line3"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_below="@+id/rl_infoTitle"
+        android:layout_marginTop="5dp"
+        android:background="@color/black" />
+
+    <RelativeLayout
+        android:id="@+id/rl_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line3"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="right">
+        <!--按钮事件-->
+        <TextView
+            android:id="@+id/tv_event1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/trainnet_inner_border_u"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/search"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_event2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/tv_event1"
+            android:background="@drawable/trainnet_inner_border_u"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/search"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_event3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/tv_event2"
+            android:background="@drawable/trainnet_inner_border_u"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/search"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_event4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/tv_event3"
+            android:background="@drawable/trainnet_inner_border_u"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/search"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line4"
+        android:layout_width="match_parent"
+        android:layout_height="3dip"
+        android:layout_below="@+id/rl_event"
+        android:background="@color/gray" />
+
+    <!--无信息图片-->
+    <ImageView
+        android:id="@+id/img_noData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:contentDescription="@string/pic"
+        android:scaleType="centerCrop"
+        android:src="@drawable/trainnet_normal_courselist"
+        android:visibility="gone" />
+</RelativeLayout>

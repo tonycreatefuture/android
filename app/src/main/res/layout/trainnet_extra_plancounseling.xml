@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/trainnet_base_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_max_height"
+        android:layout_alignParentTop="true" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/id_swipe_ly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include_title"
+        android:layout_margin="10dp">
+
+        <ListView
+            android:id="@+id/listview_coursecontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/trainnet_listviewborder"></ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</RelativeLayout>

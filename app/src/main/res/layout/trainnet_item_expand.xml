@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/rl_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_white">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/OK"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_grade"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tv_title"
+            android:gravity="center_vertical|right"
+            android:text="@string/OK"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_drop"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/dropDown"
+            android:textColor="@color/black"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_child"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_parent">
+
+        <include
+            android:id="@+id/include_traineeScore"
+            layout="@layout/trainnet_item_innerplan"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <EditText
+            android:id="@+id/innerPlanTraineeScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/include_traineeScore"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/trainnet_loginborder"
+            android:digits="@string/input_num_character"
+            android:gravity="left|center_vertical"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:maxLength="3"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/deep_gray"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp" />
+
+        <include
+            android:id="@+id/include_traineeCertificate"
+            layout="@layout/trainnet_item_innerplan"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/innerPlanTraineeScore" />
+
+        <EditText
+            android:id="@+id/innerPlanTraineeCertificate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/include_traineeCertificate"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/trainnet_loginborder"
+            android:gravity="left|center_vertical"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:maxLength="16"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/deep_gray"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp" />
+
+        <include
+            android:id="@+id/include_traineeAttend"
+            layout="@layout/trainnet_item_innerplan"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/innerPlanTraineeCertificate" />
+
+        <EditText
+            android:id="@+id/innerPlanTraineeAttend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/include_traineeAttend"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/trainnet_loginborder"
+            android:gravity="left|center_vertical"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/deep_gray"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp" />
+
+        <include
+            android:id="@+id/include_traineeRating"
+            layout="@layout/trainnet_item_innerplan"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_below="@+id/innerPlanTraineeAttend" />
+
+        <EditText
+            android:id="@+id/innerPlanTraineeRating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/include_traineeRating"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/trainnet_loginborder"
+            android:gravity="left|center_vertical"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:textColor="@color/deep_gray"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/innerPlanTraineeOk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/innerPlanTraineeRating"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/trainnet_inner_border_u"
+            android:clickable="true"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="5dp"
+            android:text="@string/save"
+            android:textColor="@color/app_blue"
+            android:textColorHint="@color/gray"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</RelativeLayout>

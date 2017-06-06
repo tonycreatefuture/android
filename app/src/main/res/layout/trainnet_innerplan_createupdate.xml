@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/trainnet_base_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_max_height"
+        android:layout_alignParentTop="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include_title"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/rl_planType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/include_planType"
+                    layout="@layout/trainnet_item_innerplan"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" />
+
+                <TextView
+                    android:id="@+id/innerPlanHead"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/include_planType"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/trainnet_inner_border_s"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="3dp"
+                    android:text="@string/HeadPlan"
+                    android:textColor="@color/light_dark_gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/innerPlanAuto"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/include_planType"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/trainnet_inner_border_u"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="3dp"
+                    android:text="@string/AutoPlan"
+                    android:textColor="@color/light_dark_gray"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_planDate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_planType">
+
+                <include
+                    android:id="@+id/include_planDate"
+                    layout="@layout/trainnet_item_innerplan"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp" />
+
+                <TextView
+                    android:id="@+id/innerPlanDate1"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/include_planDate"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/trainnet_loginborder"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hintDate1"
+                    android:padding="3dp"
+                    android:textColor="@color/light_dark_gray"
+                    android:textColorHint="@color/gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/innerPlanDateSpan"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/include_planDate"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:padding="3dp"
+                    android:text="@string/dateSpan"
+                    android:textColor="@color/light_dark_gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/innerPlanDate2"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@+id/include_planDate"
+                    android:layout_centerVertical="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/trainnet_loginborder"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/hintDate2"
+                    android:padding="3dp"
+                    android:textColor="@color/light_dark_gray"
+                    android:textColorHint="@color/gray"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <include
+                android:id="@+id/include_planCourse"
+                layout="@layout/trainnet_item_innerplan"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/rl_planDate" />
+
+            <EditText
+                android:id="@+id/innerPlanCourse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/include_planCourse"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/trainnet_loginborder"
+                android:gravity="left|center_vertical"
+                android:hint="@string/hintCourse"
+                android:inputType="text"
+                android:padding="5dp"
+                android:textColor="@color/deep_gray"
+                android:textColorHint="@color/gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/innerPlanCourseDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/innerPlanCourse"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="0dp"
+                android:background="@drawable/trainnet_loginborder"
+                android:gravity="left|center_vertical"
+                android:padding="5dp"
+                android:textColor="@color/red"
+                android:textColorHint="@color/gray"
+                android:textSize="18sp" />
+
+            <include
+                android:id="@+id/include_planTerm"
+                layout="@layout/trainnet_item_innerplan"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/innerPlanCourseDesc" />
+
+            <EditText
+                android:id="@+id/innerPlanTerm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/include_planTerm"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/trainnet_loginborder"
+                android:digits="1234567890"
+                android:ems="10"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textColor="@color/deep_gray"
+                android:textSize="18sp"></EditText>
+
+            <include
+                android:id="@+id/include_planNum"
+                layout="@layout/trainnet_item_innerplan"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/innerPlanTerm" />
+
+            <EditText
+                android:id="@+id/innerPlanNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/include_planNum"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/trainnet_loginborder"
+                android:digits="@string/input_num_character"
+                android:ems="10"
+                android:gravity="left|center_vertical"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="3"
+                android:padding="5dp"
+                android:singleLine="true"
+                android:textColor="@color/deep_gray"
+                android:textSize="18sp"></EditText>
+
+            <include
+                android:id="@+id/include_planTeacher"
+                layout="@layout/trainnet_item_innerplan"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/innerPlanNum" />
+
+            <RadioGroup
+                android:id="@+id/innerPlanTeacher"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/include_planTeacher"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/innerPlanTeacher1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:textColor="@color/deep_gray"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+                <RadioButton
+                    android:id="@+id/innerPlanTeacher2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:textColor="@color/deep_gray"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
+
+            </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/innerPlanPublished"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/innerPlanTeacher"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:checked="true"
+                android:text="@string/PlanPublished"
+                android:textColor="@color/deep_gray"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/innerPlanOk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/innerPlanPublished"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/trainnet_inner_border_u"
+                android:gravity="center_horizontal|center_vertical"
+                android:padding="5dp"
+                android:text="@string/save"
+                android:textColor="@color/app_blue"
+                android:textColorHint="@color/gray"
+                android:textSize="18sp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

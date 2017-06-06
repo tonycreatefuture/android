@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <color name="result_view">#b0000000</color>
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="half_transparent">#e0000000</color>
+
+    <color name="light_blue">#6c8ac8</color>
+    <color name="deep_blue">#013e7f</color>
+    <color name="app_blue">#236bfe</color>
+    <color name="gray">#e3e3e3</color>
+    <color name="gray_white">#f7f7f7</color>
+    <color name="light_gray">#cccccc</color>
+    <color name="light_grey">#999999</color>
+    <color name="dark_gray">#666666</color>
+    <color name="dark_light_gray">#b6b6b6</color>
+    <color name="light_dark_gray">#696969</color>
+    <color name="deep_gray">#3f3f3f</color>
+    <color name="grey">#ebebeb</color>
+    <color name="black">#000000</color>
+    <color name="pure_black">#ff000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white1">#FFFAFA</color>
+    <color name="red">#FF0000</color>
+    <color name="f850_default_blue">#0079ff</color>
+
+    <color name="green">#00FF00</color>
+
+    <drawable name="transparent">#00000000</drawable>
+
+
+    <color name="header_toast_bg">#ccebfc</color>
+    <color name="header_toast">#024ca1</color>
+    <color name="header_toast_line">#abdaf4</color>
+    <color name="offline_down_title">#909090</color>
+    <color name="offline_head_font">#FFFFFF</color>
+    <color name="gary">#898989</color>
+    <color name="taobao_black">#333333</color>
+    <color name="offline_down_size">#777777</color>
+    <color name="gray_lite">#c5c5c5</color>
+    <color name="progress_background">#ededed</color>
+    <color name="blue1">#4c90f9</color>
+    <color name="itemlist">#f4f4f4</color>
+    <color name="act_background">#efefef</color>
+    <color name="phone_bg">#f6f6f6</color>
+
+    <color name="calendar_top_bg">#023f7e</color>
+    <color name="calendar_down_color">#CCFFFF</color>
+    <color name="calendar_selected_color">#99CCFF</color>
+
+    <color name="app_background">#023f7e</color>
+
+
+</resources>

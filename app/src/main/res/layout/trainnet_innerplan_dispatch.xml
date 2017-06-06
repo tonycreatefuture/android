@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <include
+        android:id="@+id/include_title"
+        layout="@layout/trainnet_base_subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_max_height"
+        android:layout_alignParentTop="true" />
+
+    <EditText
+        android:id="@+id/innerPlanSearch"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/include_title"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/trainnet_inner_border_u"
+        android:drawableLeft="@drawable/trainnet_search"
+        android:gravity="left|center_vertical"
+        android:hint="@string/hintDispatch"
+        android:imeOptions="actionSearch"
+        android:paddingLeft="10dp"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textColorHint="@color/light_gray"
+        android:textSize="18sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/include_title"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_toRightOf="@+id/innerPlanSearch"
+        android:gravity="right">
+
+        <TextView
+            android:id="@+id/innerPlanDispatchNum"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            android:padding="3dp"
+            android:textColor="@color/light_dark_gray"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/innerPlanDispatchRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@+id/innerPlanDispatchNum"
+            android:contentDescription="@string/pic"
+            android:scaleType="centerCrop"
+            android:src="@drawable/trainnet_refresh" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listview_innerplan_dispatch"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/innerPlanSearch"
+        android:divider="@null"></ListView>
+
+</RelativeLayout>
