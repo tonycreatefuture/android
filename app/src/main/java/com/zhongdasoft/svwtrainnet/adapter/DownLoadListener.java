@@ -109,7 +109,7 @@ public class DownLoadListener implements DownloadListener {
                 ToastUtil.show(mContext, "连接错误！请稍后再试！");
                 return;
             }
-            ToastUtil.show(mContext, "已保存到SD卡。");
+            ToastUtil.show(mContext, "已保存到download文件夹。");
             File file = new File(downloadPath, result);
 //            Log.i("tag", "Path="+chat_file.getAbsolutePath());
             //通过默认工具软件打开文档
