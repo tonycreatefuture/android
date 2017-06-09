@@ -990,6 +990,9 @@
     <string name="team_authentication">身份验证</string>
     <string name="team_create_notice">请添加群成员</string>
     <string name="team_creator">群主</string>
+    <string name="team_dealerCode">经销商编号</string>
+    <string name="team_dealerName">经销商名称</string>
+    <string name="team_email">邮箱</string>
     <string name="team_everyone_invite">所有人邀请</string>
     <string name="team_everyone_update">所有人修改</string>
     <string name="team_extension">扩展示例</string>
@@ -1016,6 +1019,7 @@
     <string name="team_not_allow_anyone_join">不允许任何人申请加入</string>
     <string name="team_not_exist">该群不存在</string>
     <string name="team_notification_config">消息提醒</string>
+    <string name="team_phone">手机</string>
     <string name="team_send_message_not_allow">您已不在该群，不能发送消息</string>
     <string name="team_settings_name">设置名称</string>
     <string name="team_settings_set_name">取个名字吧</string>

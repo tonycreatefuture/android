@@ -8,12 +8,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
-import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
+import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
+import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
 import com.zhongdasoft.svwtrainnet.util.CollectionUtil;
 import com.zhongdasoft.svwtrainnet.util.StringUtil;
-import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,9 +26,9 @@ public class AwaitAuditActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String AuditRefresh = getCache().getAsString(CacheKey.AuditRefresh);
+        String AuditRefresh = TrainNetApp.getCache().getAsString(CacheKey.AuditRefresh);
         if (!StringUtil.isNullOrEmptyOrEmptySet(AuditRefresh)) {
-            processList = getGson().fromJson(AuditRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+            processList = TrainNetApp.getGson().fromJson(AuditRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
             }.getType());
         } else {
             processList = new ArrayList<>();

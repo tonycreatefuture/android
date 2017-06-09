@@ -40,7 +40,7 @@ public class FuncAddActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         wr = new WeakReference<>(this);
-        userName = MySharedPreferences.getInstance().getUserName(this);
+        userName = MySharedPreferences.getInstance().getUserName();
 
         mAdapter = new CheckListViewAdapter(this, getData(ActivityKey.MainFavorite));
         lv = (ListView) findViewById(R.id.listview_func_add);
@@ -79,7 +79,7 @@ public class FuncAddActivity extends BaseActivity {
                             mAdapter.setData(getData(ActivityKey.MainFavorite));
                             mAdapter.notifyDataSetChanged();
                         } else {
-                            String userName = MySharedPreferences.getInstance().getUserName(FuncAddActivity.this);
+                            String userName = MySharedPreferences.getInstance().getUserName();
                             boolean existUnsaved = DaoQuery.getInstance().existUnsavedUserFavorite(userName);
                             if (existUnsaved) {
                                 final String tmpUserName = userName;

@@ -2,17 +2,13 @@ package com.zhongdasoft.svwtrainnet.util;
 
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -22,17 +18,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.adapter.InnerCourse;
-import com.zhongdasoft.svwtrainnet.adapter.MyGridViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
-import com.zhongdasoft.svwtrainnet.greendao.CRUD;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ActivityKey;
 import com.zhongdasoft.svwtrainnet.greendao.DaoQuery;
 import com.zhongdasoft.svwtrainnet.greendao.entity.UserPaper;
 import com.zhongdasoft.svwtrainnet.module.exam.TestActivity;
 import com.zhongdasoft.svwtrainnet.module.exam.TestCenterActivity;
-import com.zhongdasoft.svwtrainnet.module.more.MoreAboutUsActivity;
 import com.zhongdasoft.svwtrainnet.module.more.TvContentActivity;
-import com.zhongdasoft.svwtrainnet.widget.DragGridView;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -225,7 +217,7 @@ public class DialogUtil {
             public void onClick(View v) {
                 alertDialog.dismiss();
                 Bundle bundle = new Bundle();
-                String realBeginTime = MySharedPreferences.getInstance().getCurrentTime(activity);
+                String realBeginTime = MySharedPreferences.getInstance().getCurrentTime();
                 bundle.putString("dbName", up.getDbName());
                 bundle.putString("paperId", up.getPaperId());
                 bundle.putString("examineeId", up.getExamineeId());

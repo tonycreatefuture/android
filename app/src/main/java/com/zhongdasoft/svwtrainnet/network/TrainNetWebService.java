@@ -2,8 +2,8 @@ package com.zhongdasoft.svwtrainnet.network;
 
 import android.content.Context;
 
-import com.netease.nim.uikit.NimUIKit;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
 import com.zhongdasoft.svwtrainnet.util.MyProperty;
@@ -115,7 +115,7 @@ public class TrainNetWebService {
         boolean isConnected = NetManager.isNetworkConnected(context);
         if (!isConnected) {
 //            gotoLogin(context, context.getResources().getString(R.string.showByNetError));
-            ((BaseActivity) context).gotoLogin();
+//            ((BaseActivity) context).gotoLogin();
             return netErrorMapList(context, NetCode);
         }
         ArrayList<HashMap<String, Object>> listResult;
@@ -134,8 +134,8 @@ public class TrainNetWebService {
         HashMap<String, Object> mapResult = filterSimpleMap(context, listResult, methodName + "Result");
         if (mapResult.containsKey(key) && "-1".equals(mapResult.get(key))) {
 //            gotoLogin(context, context.getResources().getString(R.string.loginByOtherDevice));
-            MySharedPreferences.getInstance().setStoreString("AccountLogout", "1", NimUIKit.getContext());
-            ((BaseActivity) context).gotoLogin();
+            MySharedPreferences.getInstance().setStoreString("AccountLogout", "1");
+//            ((BaseActivity) context).gotoLogin();
         }
         if (StringUtil.isNullOrEmpty(listKey)) {
             return listResult;
@@ -161,7 +161,7 @@ public class TrainNetWebService {
                     sbCourseNo.append(map.get("CourseNo").toString()).append(",,");
                     NewListResult.add(map);
                 }
-                activity.getCache().put(CacheKey.SuitMeCourse, sbCourseNo.toString());
+                TrainNetApp.getCache().put(CacheKey.SuitMeCourse, sbCourseNo.toString());
                 return NewListResult;
             }
             return filterList(context, listResult, listKey);
@@ -178,7 +178,7 @@ public class TrainNetWebService {
         boolean isConnected = NetManager.isNetworkConnected(context);
         if (!isConnected) {
 //            gotoLogin(context, context.getResources().getString(R.string.showByNetError));
-            ((BaseActivity) context).gotoLogin();
+//            ((BaseActivity) context).gotoLogin();
             return netErrorMap(context, NetCode);
         }
         ArrayList<HashMap<String, Object>> listResult;
@@ -196,8 +196,8 @@ public class TrainNetWebService {
         HashMap<String, Object> mapResult = filterSimpleMap(context, listResult, methodName + "Result");
         if (null != mapResult && mapResult.containsKey(key) && "-1".equals(mapResult.get(key))) {
 //            gotoLogin(context, context.getResources().getString(R.string.loginByOtherDevice));
-            MySharedPreferences.getInstance().setStoreString("AccountLogout", "1", NimUIKit.getContext());
-            ((BaseActivity) context).gotoLogin();
+            MySharedPreferences.getInstance().setStoreString("AccountLogout", "1");
+//            ((BaseActivity) context).gotoLogin();
         }
         return filterMap(context, listResult);
     }
@@ -282,7 +282,7 @@ public class TrainNetWebService {
         if ("Login".equals(mParams.get("methodName")) || "LoginByName".equals(mParams.get("methodName"))) {
             mParams.put("device", PhoneInfo.getInstance().getDeviceXML(context));
         } else {
-            String accessToken = MySharedPreferences.getInstance().getAccessToken(context);
+            String accessToken = MySharedPreferences.getInstance().getAccessToken();
             mParams.put("accessToken", accessToken);
             mParams.put("deviceId", PhoneInfo.getInstance().getDeviceId(context));
         }

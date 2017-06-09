@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
@@ -64,9 +65,9 @@ public class EvaluationFragment extends Fragment {
         if (null == mActivity) {
             return v;
         }
-        String EvaluateRefresh = mActivity.getCache().getAsString(CacheKey.EvaluateRefresh);
+        String EvaluateRefresh = TrainNetApp.getCache().getAsString(CacheKey.EvaluateRefresh);
         if (!StringUtil.isNullOrEmpty(EvaluateRefresh)) {
-            evaluationList = mActivity.getGson().fromJson(EvaluateRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+            evaluationList = TrainNetApp.getGson().fromJson(EvaluateRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
             }.getType());
         } else {
             evaluationList = new ArrayList<>();
@@ -120,7 +121,7 @@ public class EvaluationFragment extends Fragment {
     private void setEvent(ArrayList<HashMap<String, Object>> listItem, int pos) {
         if (null != listItem.get(pos).get("infoDesc")) {
             String activityId = listItem.get(pos).get("activityId").toString();
-            String jsonData = MySharedPreferences.getInstance().getString(activityId, mActivity);
+            String jsonData = MySharedPreferences.getInstance().getString(activityId);
             WebserviceUtil.getInstance().submitEvaluation(wr, activityId, jsonData);
             ToastUtil.show(mActivity, mActivity.getResources().getString(R.string.submitEvaluation));
             listItem.remove(pos);
@@ -142,7 +143,7 @@ public class EvaluationFragment extends Fragment {
 
     private ArrayList<HashMap<String, Object>> getListItem(String evaluationType) {
         ArrayList<HashMap<String, Object>> listItem = new ArrayList<>();
-        String evaluationID = MySharedPreferences.getInstance().getString(getResources().getString(R.string.evaluationID), mActivity);
+        String evaluationID = MySharedPreferences.getInstance().getString(getResources().getString(R.string.evaluationID));
         HashMap<String, Object> mapResult = null;
         for (HashMap<String, Object> map : evaluationList) {
             if ("EvaluationListResult".equals(map.get("ParentNode").toString())) {

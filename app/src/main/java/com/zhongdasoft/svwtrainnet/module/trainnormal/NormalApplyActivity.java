@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ActivityKey;
@@ -40,13 +41,13 @@ public class NormalApplyActivity extends BaseActivity {
             @Override
             public void run() {
                 if (isCached) {
-                    String SuitMeCourseRefresh = getCache().getAsString(CacheKey.SuitMeCourseRefresh);
+                    String SuitMeCourseRefresh = TrainNetApp.getCache().getAsString(CacheKey.SuitMeCourseRefresh);
                     if (!StringUtil.isNullOrEmpty(SuitMeCourseRefresh)) {
-                        courseList = getGson().fromJson(SuitMeCourseRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+                        courseList = TrainNetApp.getGson().fromJson(SuitMeCourseRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
                         }.getType());
                     } else {
                         courseList = TrainNetWebService.getInstance().GetSuitableCourse(NormalApplyActivity.this);
-                        getCache().put(CacheKey.SuitMeCourseRefresh, getGson().toJson(courseList));
+                        TrainNetApp.getCache().put(CacheKey.SuitMeCourseRefresh, TrainNetApp.getGson().toJson(courseList));
                     }
                 } else {
                     courseList = TrainNetWebService.getInstance().GetSuitableCourse(NormalApplyActivity.this);

@@ -15,12 +15,10 @@ import com.netease.nim.uikit.common.ui.popupmenu.PopupMenuItem;
 import com.netease.nim.uikit.session.SessionCustomization;
 import com.netease.nim.uikit.session.SessionEventListener;
 import com.netease.nim.uikit.session.actions.BaseAction;
-import com.netease.nim.uikit.session.activity.TeamMessageActivity;
 import com.netease.nim.uikit.session.helper.MessageHelper;
 import com.netease.nim.uikit.session.helper.MessageListPanelHelper;
 import com.netease.nim.uikit.session.module.MsgForwardFilter;
 import com.netease.nim.uikit.session.module.MsgRevokeFilter;
-import com.netease.nim.uikit.team.activity.AdvancedTeamMemberInfoActivity;
 import com.netease.nim.uikit.team.model.TeamExtras;
 import com.netease.nim.uikit.team.model.TeamRequestCode;
 import com.netease.nimlib.sdk.NIMClient;
@@ -35,9 +33,7 @@ import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
-import com.netease.nimlib.sdk.team.constant.TeamMemberType;
 import com.netease.nimlib.sdk.team.model.Team;
-import com.netease.nimlib.sdk.team.model.TeamMember;
 import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.imdemo.DemoCache;
 import com.zhongdasoft.svwtrainnet.imdemo.session.action.FileAction;
@@ -142,7 +138,7 @@ public class SessionHelper {
     }
 
     public static void startTeamSession(Context context, String tid) {
-        MySharedPreferences.getInstance().setStoreString("NimAccountCurrentTeamId", tid, context);
+        MySharedPreferences.getInstance().setStoreString("NimAccountCurrentTeamId", tid);
         startTeamSession(context, tid, null);
     }
 

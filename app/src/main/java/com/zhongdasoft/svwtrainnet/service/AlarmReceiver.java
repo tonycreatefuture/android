@@ -38,7 +38,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             boolean isEnd = true;
             for (int i = 0; i < keys.length; i++) {
 //                Log.e("Notify", "key=" + keys[i]);
-                String send = MySharedPreferences.getInstance().getString(keys[i], context);
+                String send = MySharedPreferences.getInstance().getString(keys[i]);
 //                Log.e("Notify", "send=" + send);
                 if (!StringUtil.isNullOrEmpty(send)) {
                     continue;
@@ -59,7 +59,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     private void notifyUser(Context context, int id, String key, String timeStr, String title, String message, String content) {
         long time = Long.parseLong(timeStr);
         if (time == -1) {
-            MySharedPreferences.getInstance().setStoreString(key, "1", context);
+            MySharedPreferences.getInstance().setStoreString(key, "1");
             return;
         }
 //        Log.e("Notify", "time=" + time + ",current=" + System.currentTimeMillis() + ";" + (time <= System.currentTimeMillis() && time + _30Seconds > System.currentTimeMillis()));
@@ -81,7 +81,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
             NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.notify(id, builder.build());
-            MySharedPreferences.getInstance().setStoreString(key, "1", context);
+            MySharedPreferences.getInstance().setStoreString(key, "1");
         }
     }
 }

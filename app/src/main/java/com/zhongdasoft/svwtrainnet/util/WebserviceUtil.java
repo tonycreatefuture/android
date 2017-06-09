@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.CRUD;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ActivityKey;
@@ -51,17 +52,17 @@ public class WebserviceUtil {
 
     public void submitEvaluation(final WeakReference<? extends BaseActivity> wr, final String activityId, String jsonData) {
         final BaseActivity activity = wr.get();
-        String evaluationID = MySharedPreferences.getInstance().getString(activity.getResources().getString(R.string.evaluationID), activity);
+        String evaluationID = MySharedPreferences.getInstance().getString(activity.getResources().getString(R.string.evaluationID));
         if (!NetManager.isNetworkConnected(activity)) {
-            MySharedPreferences.getInstance().setStoreString(activity.getResources().getString(R.string.evaluationID), evaluationID + activityId + ",", activity);
-            MySharedPreferences.getInstance().setStoreString(activityId, jsonData, activity);
+            MySharedPreferences.getInstance().setStoreString(activity.getResources().getString(R.string.evaluationID), evaluationID + activityId + ",");
+            MySharedPreferences.getInstance().setStoreString(activityId, jsonData);
             ToastUtil.show(activity, activity.getResources().getString(R.string.submitRating));
             return;
         }
         if (evaluationID.contains(activityId + ",")) {
             evaluationID = evaluationID.replace(activityId + ",", "");
-            MySharedPreferences.getInstance().removeString(activityId, activity);
-            MySharedPreferences.getInstance().setStoreString(activity.getResources().getString(R.string.evaluationID), evaluationID, activity);
+            MySharedPreferences.getInstance().removeString(activityId);
+            MySharedPreferences.getInstance().setStoreString(activity.getResources().getString(R.string.evaluationID), evaluationID);
         }
 
         final String myData = PhoneInfo.getInstance().getEvaluationAnswersXML(jsonData);
@@ -108,7 +109,7 @@ public class WebserviceUtil {
                 up.setUserAnswer(userAnswer);
                 CRUD.getInstance().UpdateUserPaper(up);
 
-                String currentTime = MySharedPreferences.getInstance().getCurrentTime(activity);
+                String currentTime = MySharedPreferences.getInstance().getCurrentTime();
                 currentTime = currentTime.replace(" ", "T");
                 String examXml = PhoneInfo.getInstance().getExamXML(up.getExamineeId(), up.getPaperId(), up.getRealBeginTime().replace(" ", "T"), currentTime, score + "", userAnswer);
                 final HashMap<String, Object> mapSubmitPaper = TrainNetWebService.getInstance().SubmitGrade(activity, examXml);
@@ -139,7 +140,7 @@ public class WebserviceUtil {
                                 bundle.putBoolean("isChanged", true);
                                 activity.readyGoThenKill(TestCenterActivity.class, bundle);
                             } else {
-                                String name = MySharedPreferences.getInstance().getName(activity);
+                                String name = MySharedPreferences.getInstance().getName();
                                 DialogUtil.getInstance().showScoreDialog(wr, name + "(" + up.getUserName() + ")", up.getDbName());
                             }
                         } else {
@@ -169,15 +170,15 @@ public class WebserviceUtil {
 
     public void Login(BaseActivity activity) {
         //初始化用户菜单
-        String userName = MySharedPreferences.getInstance().getString("userName", activity);
-        String isUpdate = MySharedPreferences.getInstance().getString("isUpdate", activity);
+        String userName = MySharedPreferences.getInstance().getString("userName");
+        String isUpdate = MySharedPreferences.getInstance().getString("isUpdate");
         //菜单表有数据且当前没有升级app时，不操作数据表
         if (DaoQuery.getInstance().getUserMenuCount() <= 0 || !StringUtil.isNullOrEmpty(isUpdate)) {
             CRUD.getInstance().InitUserMenu(activity.getResources());
-            MySharedPreferences.getInstance().removeString("isUpdate", activity);
+            MySharedPreferences.getInstance().removeString("isUpdate");
         }
         //设置是否显示菜单
-        String post = MySharedPreferences.getInstance().getPost(activity);
+        String post = MySharedPreferences.getInstance().getPost();
         UserMenu userMenu = DaoQuery.getInstance().getUserMenuByResName(activity.getResources().getString(R.string.TrainInner));
         userMenu.setIsValid(1);
         if (!StringUtil.isNullOrEmpty(post)) {
@@ -202,11 +203,11 @@ public class WebserviceUtil {
         if (mc != null) {
             mc.cancel();
         }
-        MySharedPreferences.getInstance().setStoreString("countTimer", "0", activity);
+        MySharedPreferences.getInstance().setStoreString("countTimer", "0");
         mc = new CurrentTimer(MyProperty.MaxValue, 1, activity);
         mc.start();
         //设置行程登记
-        String RouterRegister = activity.getCache().getAsString(CacheKey.RouterRegister);
+        String RouterRegister = TrainNetApp.getCache().getAsString(CacheKey.RouterRegister);
         if (StringUtil.isNullOrEmpty(RouterRegister)) {
             OkHttp.getInstance().GetConfirmList(activity);
         } else {
@@ -345,7 +346,7 @@ public class WebserviceUtil {
             }
         }
         profileMap.put("post", sbPost.toString());
-        activity.getCache().put(CacheKey.ProfileRefresh, activity.getGson().toJson(profileMap));
+        TrainNetApp.getCache().put(CacheKey.ProfileRefresh, TrainNetApp.getGson().toJson(profileMap));
     }
 
     public void profilePhotoRefresh(final BaseActivity activity) {

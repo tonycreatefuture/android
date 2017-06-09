@@ -45,7 +45,7 @@ public class NotifyUtil {
             keys[j] = titles[j] + sendTimes[j];
         }
 
-        String currentTime = MySharedPreferences.getInstance().getCurrentTime(mContext);
+        String currentTime = MySharedPreferences.getInstance().getCurrentTime();
         String[] times = calculateTime(sendTimes, currentTime);
 //        Log.e("Notify", "time=" + time);
         Intent intent = new Intent(mContext, MyService.class);

@@ -13,8 +13,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.StatusCode;
+import com.netease.nimlib.sdk.auth.AuthServiceObserver;
 import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.MsgServiceObserve;
+import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.HomeFragmentPagerAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
@@ -22,6 +28,7 @@ import com.zhongdasoft.svwtrainnet.imdemo.DemoCache;
 import com.zhongdasoft.svwtrainnet.imdemo.main.activity.ChatMainActivity;
 import com.zhongdasoft.svwtrainnet.module.more.ScanActivity;
 import com.zhongdasoft.svwtrainnet.util.CameraUtil;
+import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
 import com.zhongdasoft.svwtrainnet.util.StringUtil;
 import com.zhongdasoft.svwtrainnet.util.ToastUtil;
 import com.zhongdasoft.svwtrainnet.widget.NoScrollViewPaper;
@@ -29,6 +36,7 @@ import com.zhongdasoft.svwtrainnet.widget.badge.BadgeFactory;
 import com.zhongdasoft.svwtrainnet.widget.badge.BadgeView;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 /**
  * Created by tony on 16-12-2.
@@ -44,6 +52,20 @@ public class MainActivity extends BaseActivity {
     int selDrawableIds[] = {R.mipmap.tab_home_select,
             R.mipmap.tab_favorite_select, R.mipmap.tab_scan_select,
             R.mipmap.tab_train_select, R.mipmap.tab_more_select};
+    /**
+     * 用户状态变化
+     */
+    Observer<StatusCode> userStatusObserver = new Observer<StatusCode>() {
+
+        @Override
+        public void onEvent(StatusCode code) {
+            if (code.wontAutoLogin()) {
+                MySharedPreferences.getInstance().setStoreString("AccountLogout", "1");
+                gotoLogin();
+            } else {
+            }
+        }
+    };
     private WeakReference<? extends BaseActivity> wr;
     private HomeFragmentPagerAdapter pagerAdapter;
     private NoScrollViewPaper viewPager;
@@ -53,8 +75,13 @@ public class MainActivity extends BaseActivity {
     private ImageButton msg;
     private ImageButton profile;
     private BadgeView badgeView;
+    Observer<List<RecentContact>> messageObserver = new Observer<List<RecentContact>>() {
+        @Override
+        public void onEvent(List<RecentContact> recentContacts) {
+            unreadNumChanged();
+        }
+    };
     private long exitTime = 0;
-    private int unreadNum = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +127,7 @@ public class MainActivity extends BaseActivity {
 
             }
         });
+        registerObservers(true);
     }
 
     @Override
@@ -157,7 +185,7 @@ public class MainActivity extends BaseActivity {
         int position = Integer.parseInt(tab.getTag().toString());
         if (2 == position) {
             int lastPos = viewPager.getCurrentItem();
-            getCache().put(CacheKey.HomeRefresh, lastPos + "");
+            TrainNetApp.getCache().put(CacheKey.HomeRefresh, lastPos + "");
             wr.get().readyGo(ScanActivity.class);
         } else {
             setImageText(position, true);
@@ -192,9 +220,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        String pos = getCache().getAsString(CacheKey.HomeRefresh);
+        String pos = TrainNetApp.getCache().getAsString(CacheKey.HomeRefresh);
         if (!StringUtil.isNullOrEmpty(pos)) {
-            getCache().remove(CacheKey.HomeRefresh);
+            TrainNetApp.getCache().remove(CacheKey.HomeRefresh);
             int iPos = Integer.parseInt(pos);
             if (iPos > 100) {
                 pagerAdapter.setUpdateFlag();
@@ -203,26 +231,27 @@ public class MainActivity extends BaseActivity {
             setImageText(iPos, true);
             viewPager.setCurrentItem(iPos, false);
         }
-        unreadNumChanged();
+//        unreadNumChanged();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unreadNumChanged();
+//        unreadNumChanged();
     }
 
     @Override
     protected void onDestroy() {
         badgeView.unbind();
         super.onDestroy();
+        registerObservers(false);
     }
 
-    private void unreadNumChanged() {
+    public void unreadNumChanged() {
         if (null == DemoCache.getAccount()) {
             return;
         }
-        unreadNum = NIMClient.getService(MsgService.class).getTotalUnreadCount();
+        int unreadNum = NIMClient.getService(MsgService.class).getTotalUnreadCount();
         if (unreadNum > 0) {
             if (msg.getVisibility() == View.VISIBLE) {
                 badgeView.setVisibility(View.VISIBLE);
@@ -245,5 +274,14 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         CameraUtil.getInstance().activityResult(requestCode, resultCode, data, this);
+    }
+
+    /**
+     * ********************** 收消息，处理状态变化 ************************
+     */
+    private void registerObservers(boolean register) {
+        MsgServiceObserve service = NIMClient.getService(MsgServiceObserve.class);
+        service.observeRecentContact(messageObserver, register);
+        NIMClient.getService(AuthServiceObserver.class).observeOnlineStatus(userStatusObserver, register);
     }
 }

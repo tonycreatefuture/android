@@ -31,7 +31,7 @@ public class VCTActivity extends ReactActivity {
 
         Intent intent = this.getIntent();
         Bundle bundle = intent.getBundleExtra("bundle");
-        screen = MySharedPreferences.getInstance().getString("screen", this);
+        screen = MySharedPreferences.getInstance().getString("screen");
         mReactRootView = new ReactRootView(this);
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())

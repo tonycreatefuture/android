@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.google.gson.reflect.TypeToken;
 import com.soundcloud.android.crop.Crop;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
 import com.zhongdasoft.svwtrainnet.adapter.ProfileListViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
@@ -125,15 +126,15 @@ public class ListViewUtil {
         final ArrayList<HashMap<String, Object>> listItem = new ArrayList<>();
         ListView lv;
         HashMap<String, Object> profileMap;
-        String ProfileRefresh = activity.getCache().getAsString(CacheKey.ProfileRefresh);
-        profileMap = activity.getGson().fromJson(ProfileRefresh, new TypeToken<HashMap<String, Object>>() {
+        String ProfileRefresh = TrainNetApp.getCache().getAsString(CacheKey.ProfileRefresh);
+        profileMap = TrainNetApp.getGson().fromJson(ProfileRefresh, new TypeToken<HashMap<String, Object>>() {
         }.getType());
 
         if (null == profileMap || 0 == profileMap.size()) {
             return;
         }
-        String name = MySharedPreferences.getInstance().getName(activity);
-        String userName = MySharedPreferences.getInstance().getUserName(activity);
+        String name = MySharedPreferences.getInstance().getName();
+        String userName = MySharedPreferences.getInstance().getUserName();
 
         ListViewUtil.setListItem(listItem, activity.getResources().getString(R.string.UserInfo), ListViewUtil.PaperSubTitle);
         String userAccount;
@@ -166,10 +167,10 @@ public class ListViewUtil {
         String inWork = StringUtil.objectToBoolean(profileMap.get("Inwork"));
         ListViewUtil.setListItem(listItem, activity.getResources().getString(R.string.InWork) + inWork, ListViewUtil.PaperInfo);
 
-        MySharedPreferences.getInstance().setStoreString("phone", cellNumber, activity);
-        MySharedPreferences.getInstance().setStoreString("email", email, activity);
-        MySharedPreferences.getInstance().setStoreString("dealerCode", StringUtil.objectToStr1(profileMap.get("NetCode"), DealerNo), activity);
-        MySharedPreferences.getInstance().setStoreString("dealerName", StringUtil.objectToStr(profileMap.get("DealerName")), activity);
+        MySharedPreferences.getInstance().setStoreString("phone", cellNumber);
+        MySharedPreferences.getInstance().setStoreString("email", email);
+        MySharedPreferences.getInstance().setStoreString("dealerCode", StringUtil.objectToStr1(profileMap.get("NetCode"), DealerNo));
+        MySharedPreferences.getInstance().setStoreString("dealerName", StringUtil.objectToStr(profileMap.get("DealerName")));
 
 //        if (profileMap.containsKey("MembershipLevel")) {
         ListViewUtil.setListItem(listItem, activity.getResources().getString(R.string.SvwStar), ListViewUtil.PaperSubTitle);
@@ -213,7 +214,7 @@ public class ListViewUtil {
                 if (listItem.get(arg2).containsKey("paperEvent")) {
                     if (listItem.get(arg2).get("paperEvent").toString().equals(activity.getResources().getString(R.string.AllPeople))) {
                         Bundle bundle = new Bundle();
-                        String accessToken = MySharedPreferences.getInstance().getAccessToken(activity);
+                        String accessToken = MySharedPreferences.getInstance().getAccessToken();
                         bundle.putString("item", MyProperty.getCurrentValue(activity.getResources().getString(R.string.PaymentUrl, accessToken)));
                         bundle.putString("pay", activity.getResources().getString(R.string.AllPeople));
                         activity.readyGo(TvContentActivity.class, bundle);
@@ -285,9 +286,9 @@ public class ListViewUtil {
         final ArrayList<HashMap<String, Object>> listItem = new ArrayList<>();
         ArrayList<HashMap<String, Object>> processList;
         ListView lv;
-        String ConfirmRefresh = activity.getCache().getAsString(CacheKey.ConfirmRefresh);
+        String ConfirmRefresh = TrainNetApp.getCache().getAsString(CacheKey.ConfirmRefresh);
         if (!StringUtil.isNullOrEmptyOrEmptySet(ConfirmRefresh)) {
-            processList = activity.getGson().fromJson(ConfirmRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+            processList = TrainNetApp.getGson().fromJson(ConfirmRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
             }.getType());
         } else {
             processList = new ArrayList<>();

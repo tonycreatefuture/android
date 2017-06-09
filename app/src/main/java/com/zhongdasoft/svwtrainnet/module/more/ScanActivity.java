@@ -75,7 +75,7 @@ public class ScanActivity extends BaseActivity implements Callback {
                         if (url.startsWith("url:")) {
                             url = url.substring(3, url.length());
                         }
-                        url = url + "&token=" + MySharedPreferences.getInstance().getAccessToken(ScanActivity.this);
+                        url = url + "&token=" + MySharedPreferences.getInstance().getAccessToken();
                     }
                     if (scanList.containsKey("PicUrl") && null != scanList.get("PicUrl").toString()) {
                         image = BitmapUtil.bitmap2Drawable((Bitmap) scanList.get("PicUrl"));

@@ -39,6 +39,6 @@ public class GetDateTimeCallback extends StringCallback {
     public void onResponse(String response, int id) {
         JsonObject jo = JsonUtil.getJsonObject(context, response, "GetDateTime", null);
         String timeStr = jo.getAsString();
-        MySharedPreferences.getInstance().setStoreString("currentTime", timeStr.substring(0, 19).replace("T", " "), context);
+        MySharedPreferences.getInstance().setStoreString("currentTime", timeStr.substring(0, 19).replace("T", " "));
     }
 }

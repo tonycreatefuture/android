@@ -8,12 +8,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
-import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.R;
-import com.zhongdasoft.svwtrainnet.module.more.TvContentActivity;
-import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
-import com.zhongdasoft.svwtrainnet.util.StringUtil;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
+import com.zhongdasoft.svwtrainnet.base.BaseActivity;
+import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
+import com.zhongdasoft.svwtrainnet.module.more.TvContentActivity;
+import com.zhongdasoft.svwtrainnet.util.StringUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +29,9 @@ public class NewsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String HomeRefreshNews = getCache().getAsString(CacheKey.HomeRefreshNews);
+        String HomeRefreshNews = TrainNetApp.getCache().getAsString(CacheKey.HomeRefreshNews);
         if (!StringUtil.isNullOrEmptyOrEmptySet(HomeRefreshNews)) {
-            newsList = getGson().fromJson(HomeRefreshNews, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+            newsList = TrainNetApp.getGson().fromJson(HomeRefreshNews, new TypeToken<ArrayList<HashMap<String, Object>>>() {
             }.getType());
         } else {
             newsList = new ArrayList<>();

@@ -97,7 +97,7 @@ public class GetVersionCallback extends StringCallback {
                 updateType = 0;
             }
             if (updateType > 0) {
-                MySharedPreferences.getInstance().setStoreString("isUpdate", "1", context);
+                MySharedPreferences.getInstance().setStoreString("isUpdate", "1");
                 showNoticeDialog();
             } else {
                 if ("0".equals(MyProperty.getValueByKey("PublishMode", "0"))) {
@@ -130,8 +130,8 @@ public class GetVersionCallback extends StringCallback {
                         login(userNameStr, passwordStr);
                     }
                 });
-                String tmpUserName = MySharedPreferences.getInstance().getUserName(activity);
-                String tmpPassword = MySharedPreferences.getInstance().getUserName(activity);
+                String tmpUserName = MySharedPreferences.getInstance().getUserName();
+                String tmpPassword = MySharedPreferences.getInstance().getUserName();
                 LinearLayout ll_login = (LinearLayout) activity.findViewById(R.id.ll_login);
                 // 判断是否已经登录
                 if (!StringUtil.isNullOrEmpty(tmpUserName)) {
@@ -156,11 +156,11 @@ public class GetVersionCallback extends StringCallback {
             ToastUtil.show(context, activity.getResources().getString(R.string.LoginMessage));
             return;
         }
-        String timer = MySharedPreferences.getInstance().getString("countTimer", context);
+        String timer = MySharedPreferences.getInstance().getString("countTimer");
         if (StringUtil.isNullOrEmpty(timer)) {
             OkHttp.getInstance().GetDateTime(context);
         }
-        String tmpUserName = MySharedPreferences.getInstance().getUserName(context);
+        String tmpUserName = MySharedPreferences.getInstance().getUserName();
         if(!StringUtil.isNullOrEmpty(tmpUserName)){
             WebserviceUtil.getInstance().Login(activity);
         }else {

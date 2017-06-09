@@ -204,7 +204,7 @@ public class TestActivity extends BaseActivity implements OnGestureListener {
         }
         // 设置选中的题目
         String selectedQuestion = MySharedPreferences.getInstance().getString(
-                "selectedQuestion" + dbName, TestActivity.this);
+                "selectedQuestion" + dbName);
         int iSelectedQuestion = (selectedQuestion == null || ""
                 .equals(selectedQuestion)) ? 0 : Integer
                 .parseInt(selectedQuestion);
@@ -215,7 +215,7 @@ public class TestActivity extends BaseActivity implements OnGestureListener {
         float textSize = Scale.getTextSize(TestActivity.this);
         tv.setTextSize(textSize);
         if (realBeginTime == null) {
-            currentTime = MySharedPreferences.getInstance().getCurrentTime(this);
+            currentTime = MySharedPreferences.getInstance().getCurrentTime();
             realBeginTime = currentTime;
         }
         UserPaper up = DaoQuery.getInstance().findUserPaperByDB(dbName);
@@ -659,7 +659,7 @@ public class TestActivity extends BaseActivity implements OnGestureListener {
     private void saveSelectedQuestion(int pos) {
         // 保存当前选中题目
         MySharedPreferences.getInstance().setStoreString("selectedQuestion" + dbName, pos
-                + "", TestActivity.this);
+                + "");
     }
 
     public void onLongPress(MotionEvent e) {

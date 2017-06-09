@@ -29,10 +29,10 @@ public class CurrentTimer extends CountDownTimer {
 
     @Override
     public void onTick(long millisUntilFinished) {
-        String timer = MySharedPreferences.getInstance().getString("countTimer", context);
+        String timer = MySharedPreferences.getInstance().getString("countTimer");
         if (!StringUtil.isNullOrEmpty(timer)) {
             timer = (Integer.parseInt(timer) + 1) + "";
-            MySharedPreferences.getInstance().setStoreString("countTimer", timer, context);
+            MySharedPreferences.getInstance().setStoreString("countTimer", timer);
         }
 //        Log.d("---tick---", "second:" + currentTime);
     }

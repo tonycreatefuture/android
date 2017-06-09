@@ -11,9 +11,10 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
+import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
-import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
 import com.zhongdasoft.svwtrainnet.module.amap.MapActivity;
 import com.zhongdasoft.svwtrainnet.network.TrainNetWebService;
@@ -54,9 +55,9 @@ private boolean confirmed;
         String strConfirmed = getIntent().getStringExtra("confirmed");
         confirmed = Boolean.parseBoolean(strConfirmed);
         if (planId == null) {
-            planId = MySharedPreferences.getInstance().getString("currentPlan", this);
+            planId = MySharedPreferences.getInstance().getString("currentPlan");
         } else {
-            MySharedPreferences.getInstance().setStoreString("currentPlan", planId, this);
+            MySharedPreferences.getInstance().setStoreString("currentPlan", planId);
         }
         String[] id = planId.split(",,");
         this.planId = id[0];
@@ -118,7 +119,7 @@ private boolean confirmed;
 
         String courseNo = planList.get("CourseNo").toString();
         String startDate = planList.get("StartDate").toString();
-        String currentTime = MySharedPreferences.getInstance().getCurrentTime(this);
+        String currentTime = MySharedPreferences.getInstance().getCurrentTime();
         if (WebserviceUtil.getInstance().prepareRegisterRoute(courseNo, startDate, currentTime)) {
             ListViewUtil.setListItem(listItem, "", ListViewUtil.PaperInfo);
             ListViewUtil.setListItem(listItem, getResources().getString(R.string.course_register), ListViewUtil.PaperEventTwo);
@@ -182,7 +183,7 @@ private boolean confirmed;
 
         @Override
         public void run() {
-            String PlanRefresh = getCache().getAsString(CacheKey.PlanRefresh + planId);
+            String PlanRefresh = TrainNetApp.getCache().getAsString(CacheKey.PlanRefresh + planId);
             if (!NetManager.isNetworkConnected(NormalPlanActivity.this) && StringUtil.isNullOrEmptyOrEmptySet(PlanRefresh)) {
                 runOnUiThread(new Runnable() {
                     @Override
@@ -194,7 +195,7 @@ private boolean confirmed;
                 return;
             }
             if (!StringUtil.isNullOrEmptyOrEmptySet(PlanRefresh)) {
-                planList = getGson().fromJson(PlanRefresh, new TypeToken<HashMap<String, Object>>() {
+                planList = TrainNetApp.getGson().fromJson(PlanRefresh, new TypeToken<HashMap<String, Object>>() {
                 }.getType());
             } else {
                 myPlanList = TrainNetWebService.getInstance().GetTrainingPlan(NormalPlanActivity.this, planId);
@@ -208,7 +209,7 @@ private boolean confirmed;
                         }
                     }
                 }
-                getCache().put(CacheKey.PlanRefresh + planId, getGson().toJson(planList));
+                TrainNetApp.getCache().put(CacheKey.PlanRefresh + planId, TrainNetApp.getGson().toJson(planList));
             }
             runOnUiThread(new Runnable() {
                 @Override
@@ -225,7 +226,7 @@ private boolean confirmed;
             switch (msg.what) {
                 case REFRESH_COMPLETE:
                     if (NetManager.isNetworkConnected(NormalPlanActivity.this)) {
-                        getCache().remove(CacheKey.PlanRefresh);
+                        TrainNetApp.getCache().remove(CacheKey.PlanRefresh);
                         new Thread(new NormalPlanThread()).start();
                     } else {
                         ToastUtil.show(NormalPlanActivity.this, getResources().getString(R.string.refreshByNetError));

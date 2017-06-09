@@ -113,7 +113,7 @@ public class MoreAboutUsActivity extends BaseActivity {
                 setClipAndShow(getResources().getString(R.string.QRContent));
             }
         });
-        final String accessToken = MySharedPreferences.getInstance().getAccessToken(this);
+        final String accessToken = MySharedPreferences.getInstance().getAccessToken();
         ll_qa.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,6 +4,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 
+import com.netease.nimlib.sdk.AbortableFuture;
+import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.CRUD;
@@ -33,8 +35,8 @@ public class LoginHandler extends Handler {
     private Map<String, Object> timeMap = null;
     //    private AbortableFuture<LoginInfo> loginRequest;
     private View loginView;
-    private boolean needRegistered;
-    private String applyId;
+    private AbortableFuture<LoginInfo> loginRequest;
+    private HashMap<String, Object> nimAccountMap;
 
     public LoginHandler(WeakReference<? extends BaseActivity> myActivity, View loginView) {
         this.activity = myActivity.get();
@@ -73,12 +75,12 @@ public class LoginHandler extends Handler {
                         .toString());
                 // 设置999为自动登录
                 if (ReturnCode == 999) {
-                    MySharedPreferences.getInstance().setStoreString("currentTime", timeMap.get("GetDateTimeResult").toString(), activity);
+                    MySharedPreferences.getInstance().setStoreString("currentTime", timeMap.get("GetDateTimeResult").toString());
                     initUserMenu();
                     setUserMenu();
                     setCounter();
-//                    setRegisterRoute();
                 } else {
+                    MySharedPreferences.getInstance().setStoreString("AccountLogout", "0");
                     String Message = timeMap.get(activity.getResources().getString(R.string.Message)).toString();
                     if (ReturnCode == 0) {
                         // 登录验证成功
@@ -96,15 +98,13 @@ public class LoginHandler extends Handler {
                                     property = "currentTime";
                                     value = value.substring(0, 19).replace("T", " ");
                                 }
-                                MySharedPreferences.getInstance().setStoreString(property, value, activity);
+                                MySharedPreferences.getInstance().setStoreString(property, value);
                             }
-                            MySharedPreferences.getInstance().setStoreString("userName", userName, activity);
-                            MySharedPreferences.getInstance().setStoreString("password", password, activity);
-//                            setChatLogin();
+                            MySharedPreferences.getInstance().setStoreString("userName", userName);
+                            MySharedPreferences.getInstance().setStoreString("password", password);
                             initUserMenu();
                             setUserMenu();
                             setCounter();
-//                            setRegisterRoute();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -119,18 +119,18 @@ public class LoginHandler extends Handler {
     }
 
     private void initUserMenu() {
-        String isUpdate = MySharedPreferences.getInstance().getString("isUpdate", activity);
+        String isUpdate = MySharedPreferences.getInstance().getString("isUpdate");
         //菜单表有数据且当前没有升级app时，不操作数据表
         if (DaoQuery.getInstance().getUserMenuCount() > 0 && StringUtil.isNullOrEmpty(isUpdate)) {
             return;
         }
         CRUD.getInstance().InitUserMenu(activity.getResources());
-        MySharedPreferences.getInstance().removeString("isUpdate", activity);
+        MySharedPreferences.getInstance().removeString("isUpdate");
     }
 
     private void setUserMenu() {
         //设置是否显示菜单
-        String post = MySharedPreferences.getInstance().getPost(activity);
+        String post = MySharedPreferences.getInstance().getPost();
         UserMenu userMenu = DaoQuery.getInstance().getUserMenuByResName(activity.getResources().getString(R.string.TrainInner));
         userMenu.setIsValid(1);
         if (!StringUtil.isNullOrEmpty(post)) {
@@ -142,7 +142,7 @@ public class LoginHandler extends Handler {
         }
         CRUD.getInstance().UpdateUserMenu(userMenu);
 
-        String teachPlan = MySharedPreferences.getInstance().getString("TeachPlan", activity);
+        String teachPlan = MySharedPreferences.getInstance().getString("TeachPlan");
         userMenu = DaoQuery.getInstance().getUserMenuByResName(activity.getResources().getString(R.string.TrainPlan));
         if (1 == userMenu.getIsValid()) {
             if (!StringUtil.isNullOrEmpty(teachPlan)) {
@@ -162,7 +162,7 @@ public class LoginHandler extends Handler {
         if (mc != null) {
             mc.cancel();
         }
-        MySharedPreferences.getInstance().setStoreString("countTimer", "0", activity);
+        MySharedPreferences.getInstance().setStoreString("countTimer", "0");
         mc = new CurrentTimer(MyProperty.MaxValue, 1, activity);
         mc.start();
 
@@ -187,6 +187,7 @@ public class LoginHandler extends Handler {
                 sendEmptyMessage(0);
                 return;
             }
+            nimAccountMap = TrainNetWebService.getInstance().ProfileNimAccount(activity);
             if (!isLogin) {
                 if (StringUtil.isNullOrEmpty(userName)) {
                     HashMap<String, Object> localMap = new HashMap<>();
@@ -212,7 +213,7 @@ public class LoginHandler extends Handler {
                                 || "Dealer".equals(localMap.get(parentNode).toString())) {
                             timeMap.put(key, localMap.get(key));
                         } else if ("BindedDealerStaffUser".equals(localMap.get(parentNode).toString())) {
-                            MySharedPreferences.getInstance().setStoreString("TeachPlan", "1", activity);
+                            MySharedPreferences.getInstance().setStoreString("TeachPlan", "1");
                         } else if ("ApiIdValuePairOfInt32String".equals(localMap.get(parentNode).toString())) {
                             if ("Value".equalsIgnoreCase(key)) {
                                 if (timeMap.containsKey("post")) {

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.entity.ConfirmList;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
@@ -56,13 +57,13 @@ public class GetConfirmListCallback extends StringCallback {
             int count = confirmList.getResult().getApiApply().size();
             String processCount;
             processCount = count > 99 ? "99+" : count + "";
-            activity.getCache().put(CacheKey.HomeConfirmCount, processCount);
-            activity.getCache().put(CacheKey.ConfirmRefresh, activity.getGson().toJson(confirmList));
+            TrainNetApp.getCache().put(CacheKey.HomeConfirmCount, processCount);
+            TrainNetApp.getCache().put(CacheKey.ConfirmRefresh, TrainNetApp.getGson().toJson(confirmList));
 
             String applyId = null;
             String startDate = null;
             String courseNo;
-            String currentTime = MySharedPreferences.getInstance().getCurrentTime(activity);
+            String currentTime = MySharedPreferences.getInstance().getCurrentTime();
             boolean needRegistered = false;
             for (int i = 0; i < count; i++) {
                 if (!needRegistered) {
@@ -78,7 +79,7 @@ public class GetConfirmListCallback extends StringCallback {
             if (needRegistered) {
                 Bundle bundle = new Bundle();
                 bundle.putString("ApplyId", applyId);
-                MySharedPreferences.getInstance().setStoreString(CacheKey.RouterRegister, applyId, context);
+                MySharedPreferences.getInstance().setStoreString(CacheKey.RouterRegister, applyId);
                 activity.readyGoThenKill(LoginAfterActivity.class, bundle);
             } else {
                 activity.readyGoThenKill(MainActivity.class);

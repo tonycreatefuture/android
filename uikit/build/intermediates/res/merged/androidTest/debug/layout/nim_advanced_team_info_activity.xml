@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
     <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:id="@+id/app_bar_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/AppTheme.AppBarOverlay"-->
-        <!--app:elevation="0dp">-->
+    <!--android:id="@+id/app_bar_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:theme="@style/AppTheme.AppBarOverlay"-->
+    <!--app:elevation="0dp">-->
 
-        <!--<android.support.v7.widget.Toolbar-->
-            <!--android:id="@+id/toolbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="?attr/actionBarSize"-->
-            <!--android:background="?attr/colorPrimary"-->
-            <!--app:titleTextAppearance="@style/Toolbar.TitleText">-->
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbar"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="?attr/actionBarSize"-->
+    <!--android:background="?attr/colorPrimary"-->
+    <!--app:titleTextAppearance="@style/Toolbar.TitleText">-->
 
-            <!--<include layout="@layout/nim_action_bar_right_clickable_tv" />-->
-        <!--</android.support.v7.widget.Toolbar>-->
+    <!--<include layout="@layout/nim_action_bar_right_clickable_tv" />-->
+    <!--</android.support.v7.widget.Toolbar>-->
     <!--</android.support.design.widget.AppBarLayout>-->
 
     <include
@@ -54,14 +53,15 @@
                 <com.netease.nim.uikit.common.ui.imageview.HeadImageView
                     android:id="@+id/team_head_image"
                     android:layout_width="50dip"
-                    android:layout_height="50dip" />
+                    android:layout_height="50dip"
+                    android:layout_centerVertical="true" />
 
                 <TextView
                     android:id="@+id/team_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dip"
-                    android:layout_marginTop="5dip"
+                    android:layout_marginTop="0dip"
                     android:layout_toRightOf="@id/team_head_image"
                     android:text="Team Name"
                     android:textColor="@color/color_black_333333"
@@ -74,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/team_name"
                     android:layout_below="@id/team_name"
-                    android:layout_marginTop="8dip"
+                    android:layout_marginTop="0dip"
                     android:text="creator"
                     android:textColor="@color/color_grey_999999"
                     android:textSize="@dimen/text_size_14" />
@@ -83,10 +83,10 @@
                     android:id="@+id/temp_text_with"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@id/team_id"
-                    android:layout_marginLeft="12dip"
-                    android:layout_toRightOf="@id/team_id"
-                    android:text="于"
+                    android:layout_alignLeft="@id/team_id"
+                    android:layout_below="@id/team_id"
+                    android:layout_marginTop="0dip"
+                    android:text="创建于"
                     android:textColor="@color/color_grey_999999"
                     android:textSize="@dimen/text_size_13" />
 
@@ -108,7 +108,8 @@
                     android:layout_toRightOf="@id/team_create_time"
                     android:text="创建"
                     android:textColor="@color/color_grey_999999"
-                    android:textSize="@dimen/text_size_13" />
+                    android:textSize="@dimen/text_size_13"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -116,30 +117,55 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/nim_arrow_right"
-                    android:visibility="invisible"/>
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <!--<include-->
-                <!--android:id="@+id/team_mime_layout"-->
-                <!--layout="@layout/nim_advanced_team_info_divider_item" />-->
+            <!--android:id="@+id/team_mime_layout"-->
+            <!--layout="@layout/nim_advanced_team_info_divider_item" />-->
 
-            <!--<include-->
-                <!--android:id="@+id/team_memeber_layout"-->
-                <!--layout="@layout/nim_advanced_team_info_divider_item" />-->
+            <include
+                android:id="@+id/team_memeber_layout"
+                layout="@layout/nim_advanced_team_info_divider_item"
+                android:visibility="gone" />
 
-            <com.netease.nim.uikit.team.ui.TeamInfoGridView
-                android:id="@+id/team_member_grid_view"
-                style="@style/grid_view"
-                android:layout_width="fill_parent"
+
+            <RelativeLayout
+                android:id="@+id/teamMember"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:numColumns="5"
-                android:paddingBottom="25dip"
-                android:paddingLeft="12dip"
-                android:paddingRight="12dip"
-                android:paddingTop="16dip"
-                android:verticalSpacing="16dip"></com.netease.nim.uikit.team.ui.TeamInfoGridView>
+                android:clickable="true">
+
+                <com.netease.nim.uikit.team.ui.TeamInfoGridView
+                    android:id="@+id/team_member_grid_view"
+                    style="@style/grid_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:numColumns="5"
+                    android:paddingBottom="25dip"
+                    android:paddingLeft="12dip"
+                    android:paddingRight="12dip"
+                    android:paddingTop="16dip"
+                    android:verticalSpacing="16dip"></com.netease.nim.uikit.team.ui.TeamInfoGridView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:drawablePadding="10dp"
+                    android:drawableRight="@drawable/nim_arrow_right"
+                    android:ellipsize="end"
+                    android:gravity="right|center_vertical"
+                    android:hint=" "
+                    android:singleLine="true"
+                    android:textColor="@color/color_grey_999999"
+                    android:textColorHint="@color/color_grey_999999"
+                    android:textSize="@dimen/text_size_15" />
+            </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -163,11 +189,12 @@
                 <include
                     android:id="@+id/team_extension_layout"
                     layout="@layout/nim_advanced_team_info_divider_item"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <include
                     android:id="@+id/team_notification_config_layout"
-                    layout="@layout/nim_advanced_team_info_divider_item" />
+                    layout="@layout/nim_advanced_team_info_divider_item"
+                    android:visibility="gone" />
             </LinearLayout>
 
 

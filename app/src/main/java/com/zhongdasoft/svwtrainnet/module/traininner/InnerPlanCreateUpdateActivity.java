@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ACache;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
@@ -94,11 +95,11 @@ public class InnerPlanCreateUpdateActivity extends BaseActivity {
 
         wr = new WeakReference<>(this);
 
-        dealerNo = MySharedPreferences.getInstance().getString("DealerNo", this);
+        dealerNo = MySharedPreferences.getInstance().getString("DealerNo");
 
-        mCache = getCache();
-        gson = getGson();
-        currentTime = MySharedPreferences.getInstance().getCurrentTime(this);
+        mCache = TrainNetApp.getCache();
+        gson = TrainNetApp.getGson();
+        currentTime = MySharedPreferences.getInstance().getCurrentTime();
         int[] includes = {R.id.include_planType, R.id.include_planDate, R.id.include_planCourse, R.id.include_planTerm, R.id.include_planNum, R.id.include_planTeacher};
         int[] texts = {R.string.PlanType, R.string.PlanDate, R.string.PlanCourse, R.string.PlanTerm, R.string.PlanNum, R.string.PlanTeacher};
         for (int i = 0; i < includes.length; i++) {
@@ -295,8 +296,8 @@ public class InnerPlanCreateUpdateActivity extends BaseActivity {
     }
 
     private void loadTeacher() {
-        String name = MySharedPreferences.getInstance().getName(this);
-        String userName = MySharedPreferences.getInstance().getUserName(this);
+        String name = MySharedPreferences.getInstance().getName();
+        String userName = MySharedPreferences.getInstance().getUserName();
         innerPlanTeacher1.setTag(userName);
         innerPlanTeacher1.setText(name);
         innerPlanTeacher1.setVisibility(View.VISIBLE);
@@ -358,7 +359,7 @@ public class InnerPlanCreateUpdateActivity extends BaseActivity {
                                 alertDialog.dismiss();
                                 String returnCode = resultMap.get(getResources().getString(R.string.ReturnCode)).toString();
                                 if ("0".equals(returnCode)) {
-                                    String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery", InnerPlanCreateUpdateActivity.this);
+                                    String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery");
                                     boolean isRun = true;
                                     if (currentTime.substring(0, 10).compareTo(innerPlanDate1.getText().toString()) < 0) {
                                         isRun = false;
@@ -369,7 +370,7 @@ public class InnerPlanCreateUpdateActivity extends BaseActivity {
                                         } else {
                                             innerPlanQuery = "0" + innerPlanQuery.substring(1, innerPlanQuery.length());
                                         }
-                                        MySharedPreferences.getInstance().setStoreString("InnerPlanQuery", innerPlanQuery, InnerPlanCreateUpdateActivity.this);
+                                        MySharedPreferences.getInstance().setStoreString("InnerPlanQuery", innerPlanQuery);
                                     }
                                     readyGoThenKill(TrainInnerActivity.class);
                                 }

@@ -4476,6 +4476,8 @@ containing a value of this type.
         public static int dialog_message_text_style=0x7f090183;
         public static int dialog_title_text_style=0x7f090184;
         public static int easy_dialog_edit_text_style=0x7f090185;
+        /**  后面的activity变暗 
+         */
         public static int easy_dialog_style=0x7f090186;
         public static int edit_text_style=0x7f090187;
         public static int grid_view=0x7f090188;

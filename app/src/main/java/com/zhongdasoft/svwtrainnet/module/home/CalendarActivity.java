@@ -8,12 +8,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
-import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
+import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
+import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
 import com.zhongdasoft.svwtrainnet.util.CalendarUtil;
 import com.zhongdasoft.svwtrainnet.util.StringUtil;
-import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
 import com.zhongdasoft.svwtrainnet.widget.CalendarView;
 
 import java.lang.ref.WeakReference;
@@ -118,9 +119,9 @@ public class CalendarActivity extends BaseActivity {
             }
         });
 
-        String CalendarRefresh = getCache().getAsString(CacheKey.CalendarRefresh);
+        String CalendarRefresh = TrainNetApp.getCache().getAsString(CacheKey.CalendarRefresh);
         if (!StringUtil.isNullOrEmptyOrEmptySet(CalendarRefresh)) {
-            dateList = getGson().fromJson(CalendarRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+            dateList = TrainNetApp.getGson().fromJson(CalendarRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
             }.getType());
         } else {
             dateList = new ArrayList<>();

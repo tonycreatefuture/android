@@ -10,19 +10,19 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.adapter.InnerListViewAdapter;
+import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.network.TrainNetWebService;
-import com.zhongdasoft.svwtrainnet.widget.popwindow.PlanPopWindow;
-import com.zhongdasoft.svwtrainnet.widget.popwindow.PlanSpinerAdapter;
-import com.zhongdasoft.svwtrainnet.widget.popwindow.SpinnerOption;
 import com.zhongdasoft.svwtrainnet.util.ChineseToEnglish;
 import com.zhongdasoft.svwtrainnet.util.CollectionUtil;
 import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
 import com.zhongdasoft.svwtrainnet.util.Scale;
 import com.zhongdasoft.svwtrainnet.util.StringUtil;
 import com.zhongdasoft.svwtrainnet.util.Waiting;
-import com.zhongdasoft.svwtrainnet.adapter.InnerListViewAdapter;
+import com.zhongdasoft.svwtrainnet.widget.popwindow.PlanPopWindow;
+import com.zhongdasoft.svwtrainnet.widget.popwindow.PlanSpinerAdapter;
+import com.zhongdasoft.svwtrainnet.widget.popwindow.SpinnerOption;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public class TrainInnerActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        currentTime = MySharedPreferences.getInstance().getCurrentTime(this);
+        currentTime = MySharedPreferences.getInstance().getCurrentTime();
         wr = new WeakReference<>(this);
 
 //        String status = getIntent().getStringExtra("status");
@@ -67,7 +67,7 @@ public class TrainInnerActivity extends BaseActivity {
         tvTitle = (TextView) findViewById(R.id.trainnet_title);
         Button rightBtn = (Button) findViewById(R.id.trainnet_button_right);
 //        if (isInternalTrainer) {
-        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery", TrainInnerActivity.this);
+        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery");
         if (!StringUtil.isNullOrEmpty(innerPlanQuery)) {
             iStatus = Integer.parseInt(innerPlanQuery.substring(0, 1));
             int j = Integer.parseInt(innerPlanQuery.substring(2, 3));
@@ -79,7 +79,7 @@ public class TrainInnerActivity extends BaseActivity {
                 currentPlanType = "All";
             }
         }
-        InnerPlanQuerySelectedYM = MySharedPreferences.getInstance().getString("InnerPlanQuerySelectedYM", this);
+        InnerPlanQuerySelectedYM = MySharedPreferences.getInstance().getString("InnerPlanQuerySelectedYM");
         if (StringUtil.isNullOrEmpty(InnerPlanQuerySelectedYM)) {
             String yearMonth = getYearMonth();
             InnerPlanQuerySelectedYM = yearMonth.split(",")[1];
@@ -257,7 +257,7 @@ public class TrainInnerActivity extends BaseActivity {
                                     long arg3) {
             }
         });
-        String InnerPlanPos = MySharedPreferences.getInstance().getString("InnerPlanPos", this);
+        String InnerPlanPos = MySharedPreferences.getInstance().getString("InnerPlanPos");
         if (StringUtil.isNullOrEmpty(InnerPlanPos)) {
             lv.setSelection(0);
         } else {
@@ -409,7 +409,7 @@ public class TrainInnerActivity extends BaseActivity {
     }
 
     private void planClick(int pos) {
-        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery", this);
+        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery");
         if (StringUtil.isNullOrEmpty(innerPlanQuery)) {
             innerPlanQuery = getResources().getString(R.string.innerPlanQuery);
         }
@@ -423,7 +423,7 @@ public class TrainInnerActivity extends BaseActivity {
         } else {
             currentPlanType = "All";
         }
-        InnerPlanQuerySelectedYM = MySharedPreferences.getInstance().getString("InnerPlanQuerySelectedYM", this);
+        InnerPlanQuerySelectedYM = MySharedPreferences.getInstance().getString("InnerPlanQuerySelectedYM");
         if (StringUtil.isNullOrEmpty(InnerPlanQuerySelectedYM)) {
             String yearMonth = getYearMonth();
             InnerPlanQuerySelectedYM = yearMonth.split(",")[0];

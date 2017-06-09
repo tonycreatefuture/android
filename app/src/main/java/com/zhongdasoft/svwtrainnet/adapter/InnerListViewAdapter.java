@@ -9,18 +9,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.module.traininner.InnerPlanCreateUpdateActivity;
 import com.zhongdasoft.svwtrainnet.module.traininner.InnerPlanDispatchActivity;
 import com.zhongdasoft.svwtrainnet.module.traininner.InnerPlanScoreActivity;
 import com.zhongdasoft.svwtrainnet.module.traininner.InnerPlanSummaryActivity;
-import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.module.traininner.TrainInnerActivity;
+import com.zhongdasoft.svwtrainnet.network.TrainNetWebService;
 import com.zhongdasoft.svwtrainnet.util.DialogUtil;
 import com.zhongdasoft.svwtrainnet.util.HtmlUtil;
 import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
 import com.zhongdasoft.svwtrainnet.util.Waiting;
-import com.zhongdasoft.svwtrainnet.network.TrainNetWebService;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -152,7 +152,7 @@ public class InnerListViewAdapter extends BaseAdapter {
                         } else {
                             bundle.putString("planStatus", mData.get(pos).get("planStatus").toString());
                         }
-                        MySharedPreferences.getInstance().setStoreString("InnerPlanPos", pos + "", mActivity);
+                        MySharedPreferences.getInstance().setStoreString("InnerPlanPos", pos + "");
                         switch (value) {
                             case "人员":
                                 bundle.putInt("approveNumber", Integer.parseInt(mData.get(pos).get("approveNumber").toString()));
@@ -255,8 +255,8 @@ public class InnerListViewAdapter extends BaseAdapter {
 
     private void setImg(int position, String key, ImageView img) {
         if (mData.get(position).containsKey(key)) {
-            Integer drawableId = (Integer) mData.get(position).get(key);
-            img.setImageResource(drawableId);
+//            Integer drawableId = (Integer) mData.get(position).get(key);
+//            img.setImageResource(drawableId);
             img.setVisibility(View.VISIBLE);
             String info = "";
             if (mData.get(position).get(key) != null) {
@@ -289,6 +289,9 @@ public class InnerListViewAdapter extends BaseAdapter {
                         }
                     }
                 });
+            } else {
+                Integer drawableId = (Integer) mData.get(position).get(key);
+                img.setImageResource(drawableId);
             }
         } else {
             img.setVisibility(View.GONE);

@@ -60,7 +60,7 @@ public class TestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.nettest_test_center, null);
         lv = (ListView) v.findViewById(R.id.listview_testcenter);
-        userName = MySharedPreferences.getInstance().getUserName(mActivity);
+        userName = MySharedPreferences.getInstance().getUserName();
         userPaperList = DaoQuery.getInstance().getUserPaperList(userName, 0 == position ? false : true);
         setListView();
         return v;
@@ -159,7 +159,7 @@ public class TestFragment extends Fragment {
                         return;
                     }
                     up = DaoQuery.getInstance().findUserPaperByKey(listItemRunning.get(arg2).get("key"));
-                    currentTime = MySharedPreferences.getInstance().getCurrentTime(mActivity);
+                    currentTime = MySharedPreferences.getInstance().getCurrentTime();
                     int status = getTestStatus(up);
                     switch (status) {
                         case TestKey.TEST_PREPARED:
@@ -192,13 +192,13 @@ public class TestFragment extends Fragment {
                         return;
                     }
                     up = DaoQuery.getInstance().findUserPaperByKey(listItemFinished.get(arg2).get("key"));
-                    MySharedPreferences.getInstance().setStoreString("dbName", up.getDbName(), mActivity);
+                    MySharedPreferences.getInstance().setStoreString("dbName", up.getDbName());
                     TextView infoDesc = (TextView) arg1.findViewById(R.id.infoDesc);
                     if (mActivity.getResources().getString(R.string.submitScore).equals(infoDesc.getText().toString())) {
                         WebserviceUtil.getInstance().submitExam(wr, up);
                     } else {
                         if (up.getShowScore()) {
-                            String name = MySharedPreferences.getInstance().getName(mActivity);
+                            String name = MySharedPreferences.getInstance().getName();
                             DialogUtil.getInstance().showScoreDialog(wr, name + "(" + userName + ")", up.getDbName());
                         }
                     }
@@ -219,7 +219,7 @@ public class TestFragment extends Fragment {
     }
 
     private int getTestStatus(UserPaper userPaper) {
-        currentTime = MySharedPreferences.getInstance().getCurrentTime(mActivity);
+        currentTime = MySharedPreferences.getInstance().getCurrentTime();
         int iReturn = 0;
         int status = userPaper.getStatus();
         // 考试已结束
@@ -255,7 +255,7 @@ public class TestFragment extends Fragment {
     }
 
     private int getMinutes(String beginTime) {
-        currentTime = MySharedPreferences.getInstance().getCurrentTime(mActivity);
+        currentTime = MySharedPreferences.getInstance().getCurrentTime();
         Date dCurrentTime = StringUtil
                 .strToDate(currentTime.replace("T", " "));
         String BeginTime = beginTime.replace("T", " ");

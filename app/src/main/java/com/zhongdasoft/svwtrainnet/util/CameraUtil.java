@@ -317,7 +317,7 @@ public class CameraUtil {
 
     private void changeFileName(final WeakReference<? extends BaseActivity> wr, final LinearLayout ll_upload, final String filePath) {
         final BaseActivity activity = wr.get();
-        String newFileName = MySharedPreferences.getInstance().getCurrentTime(activity);
+        String newFileName = MySharedPreferences.getInstance().getCurrentTime();
         newFileName = newFileName.replace("-", "").replace(":", "").replace("T", "").replace(" ", "");
         DialogUtil.getInstance().showInputDialog(wr, "请输入文件名", newFileName, 0, new DialogUtil.MyDismiss() {
             @Override

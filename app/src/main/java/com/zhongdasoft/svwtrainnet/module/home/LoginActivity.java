@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
 import com.zhongdasoft.svwtrainnet.util.ToastUtil;
@@ -20,7 +21,7 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getCache().clear();
+        TrainNetApp.getCache().clear();
 //        Log.e("---login---", "login clear");
         // 注销清除本地缓存记录
         Intent intent = getIntent();
@@ -55,8 +56,8 @@ public class LoginActivity extends BaseActivity {
     private synchronized void clear() {
         // 清除本地记录的登录信息
         NIMClient.getService(AuthService.class).logout();
-        MySharedPreferences.getInstance().removeAll(this);
-        getCache().clear();
+        MySharedPreferences.getInstance().removeAll();
+        TrainNetApp.getCache().clear();
         Waiting.dismiss();
     }
 

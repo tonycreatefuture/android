@@ -52,7 +52,7 @@ public class TestCenterActivity extends BaseActivity {
         tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        userName = MySharedPreferences.getInstance().getUserName(this);
+        userName = MySharedPreferences.getInstance().getUserName();
         runThread();
     }
 

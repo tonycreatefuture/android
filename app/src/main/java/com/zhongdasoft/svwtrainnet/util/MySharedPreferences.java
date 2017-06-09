@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
+
 import java.util.Calendar;
 import java.util.Map;
 
@@ -26,14 +28,14 @@ public class MySharedPreferences {
         return instance;
     }
 
-    private void setSharedPreferences(Context context) {
-        sharedPreferences = context.getSharedPreferences("userInfo",
+    private void setSharedPreferences() {
+        sharedPreferences = TrainNetApp.getContext().getSharedPreferences("userInfo",
                 Context.MODE_PRIVATE);
         paramMap = (Map<String, Object>) sharedPreferences.getAll();
     }
 
-    public String getString(String key, Context context) {
-        setSharedPreferences(context);
+    public String getString(String key) {
+        setSharedPreferences();
         if (paramMap.containsKey(key)) {
             if (paramMap.get(key) != null) {
                 return paramMap.get(key).toString();
@@ -43,47 +45,46 @@ public class MySharedPreferences {
         return "";
     }
 
-    public void setStoreString(String key, String value,
-                               Context context) {
-        setSharedPreferences(context);
+    public void setStoreString(String key, String value) {
+        setSharedPreferences();
         Editor editor = sharedPreferences.edit();
         editor.putString(key, value);
         editor.apply();
     }
 
-    public void removeString(String key, Context context) {
-        setSharedPreferences(context);
+    public void removeString(String key) {
+        setSharedPreferences();
         Editor editor = sharedPreferences.edit();
         editor.remove(key);
         editor.apply();
     }
 
-    public void removeAll(Context context) {
-        setSharedPreferences(context);
+    public void removeAll() {
+        setSharedPreferences();
         Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
     }
 
-    public String getAccessToken(Context context) {
-        return instance.getString("AccessToken", context);
+    public String getAccessToken() {
+        return instance.getString("AccessToken");
     }
 
-    public String getUserName(Context context) {
-        return instance.getString("userName", context);
+    public String getUserName() {
+        return instance.getString("userName");
     }
 
-    public String getName(Context context) {
-        return instance.getString("Name", context);
+    public String getName() {
+        return instance.getString("Name");
     }
 
-    public String getCurrentTime(Context context) {
-        String timer = instance.getString("countTimer", context);
+    public String getCurrentTime() {
+        String timer = instance.getString("countTimer");
         if (StringUtil.isNullOrEmpty(timer)) {
             timer = "0";
-            instance.setStoreString("countTimer", timer, context);
+            instance.setStoreString("countTimer", timer);
         }
-        String currentTime = instance.getString("currentTime", context);
+        String currentTime = instance.getString("currentTime");
         currentTime = currentTime.replace("T", " ");
         Calendar cal = Calendar.getInstance();
         cal.setTime(StringUtil.strToDate(currentTime));
@@ -92,12 +93,12 @@ public class MySharedPreferences {
         return value;
     }
 
-    public String getPost(Context context) {
-        return instance.getString("post", context);
+    public String getPost() {
+        return instance.getString("post");
     }
 
-    public String getDealer(Context context) {
-        return instance.getString("DealerName", context);
+    public String getDealer() {
+        return instance.getString("DealerName");
     }
 
 }

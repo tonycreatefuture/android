@@ -214,7 +214,7 @@ public class OnLineListViewAdapter extends BaseAdapter {
 
                                     Bundle bundle = new Bundle();
                                     bundle.putBundle("action", subBundle);
-                                    MySharedPreferences.getInstance().setStoreString("screen", screen, mActivity);
+                                    MySharedPreferences.getInstance().setStoreString("screen", screen);
 
                                     mActivity.readyGo(VCTActivity.class, bundle, "bundle");
                                 } else {

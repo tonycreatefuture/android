@@ -25,6 +25,7 @@ import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.auth.AuthService;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ACache;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
@@ -127,8 +128,8 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
         mSwipeLayout.setProgressViewOffset(true, 0, 50);
-        mCache = activity.getCache();
-        gson = activity.getGson();
+        mCache = TrainNetApp.getCache();
+        gson = TrainNetApp.getGson();
 
         initDrawerLayout();
         btnPerson = (ImageButton) activity
@@ -181,16 +182,28 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
     private void setNumbers(int i) {
         switch (i) {
             case 0:
-                ((TextView) activity.findViewById(R.id.include_audit).findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeAuditCount));
+                View audit = activity.findViewById(R.id.include_audit);
+                if (null != audit) {
+                    ((TextView) audit.findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeAuditCount));
+                }
                 break;
             case 1:
-                ((TextView) activity.findViewById(R.id.include_confirm).findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeConfirmCount));
+                View confirm = activity.findViewById(R.id.include_confirm);
+                if (null != confirm) {
+                    ((TextView) activity.findViewById(R.id.include_confirm).findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeConfirmCount));
+                }
                 break;
             case 2:
-                ((TextView) activity.findViewById(R.id.include_study).findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeStudyCount));
+                View study = activity.findViewById(R.id.include_study);
+                if (null != study) {
+                    ((TextView) activity.findViewById(R.id.include_study).findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeStudyCount));
+                }
                 break;
             case 3:
-                ((TextView) activity.findViewById(R.id.include_evaluate).findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeEvaluateCount));
+                View evaluate = activity.findViewById(R.id.include_evaluate);
+                if (null != evaluate) {
+                    ((TextView) activity.findViewById(R.id.include_evaluate).findViewById(R.id.tv_count)).setText(mCache.getAsString(CacheKey.HomeEvaluateCount));
+                }
                 break;
             default:
                 break;
@@ -268,8 +281,8 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
         String[] accounts = nimAccount.split("-");
         final String account = accounts[0];
         final String token = accounts[1];
-        MySharedPreferences.getInstance().setStoreString("NimAccount", account, activity);
-        final String accessToken = MySharedPreferences.getInstance().getString("AccessToken", activity);
+        MySharedPreferences.getInstance().setStoreString("NimAccount", account);
+        final String accessToken = MySharedPreferences.getInstance().getString("AccessToken");
         loginRequest = NIMClient.getService(AuthService.class).login(new LoginInfo(account, token));
         loginRequest.setCallback(new RequestCallback<LoginInfo>() {
             @Override
@@ -278,7 +291,6 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
                 DemoCache.setAccount(account);
                 DemoCache.setToken(accessToken);
                 saveLoginInfo(account, token);
-                MySharedPreferences.getInstance().setStoreString("AccountLogout", "0", activity);
 
                 // 初始化消息提醒
                 NIMClient.toggleNotification(UserPreferences.getNotificationToggle());
@@ -383,6 +395,7 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
                     }
                 }
             }
+
 
             //train calendar
             if (StringUtil.isNullOrEmptyOrEmptySet(mCache.getAsString(CacheKey.HomeTrainCount))) {
@@ -497,8 +510,8 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
                     }
                 }
                 processCount = count > 99 ? "99+" : count + "";
-                activity.getCache().put(CacheKey.HomeEvaluateCount, processCount);
-                activity.getCache().put(CacheKey.EvaluateRefresh, activity.getGson().toJson(evaluateList));
+                TrainNetApp.getCache().put(CacheKey.HomeEvaluateCount, processCount);
+                TrainNetApp.getCache().put(CacheKey.EvaluateRefresh, TrainNetApp.getGson().toJson(evaluateList));
             }
 
             if (StringUtil.isNullOrEmptyOrEmptySet(mCache.getAsString(CacheKey.ProfileRefresh))) {

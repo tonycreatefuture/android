@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.OnLineListViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.CRUD;
@@ -176,7 +177,7 @@ public class TrainOnLineActivity extends BaseActivity {
 
         tmpListItem = new ArrayList<>();
         listItem = new ArrayList<>();
-        userName = MySharedPreferences.getInstance().getUserName(this);
+        userName = MySharedPreferences.getInstance().getUserName();
         action();
     }
 
@@ -308,8 +309,8 @@ public class TrainOnLineActivity extends BaseActivity {
         cPos = 0;
         rootId = "-2";
         typeId = "-1";
-        getCache().put(getCrId(), rootId);
-        getCache().put(getCtId(), typeId);
+        TrainNetApp.getCache().put(getCrId(), rootId);
+        TrainNetApp.getCache().put(getCtId(), typeId);
     }
 
     private void filterList(String text) {
@@ -543,7 +544,7 @@ public class TrainOnLineActivity extends BaseActivity {
     private void setChild(String parentId) {
         child_data_list = new ArrayList<>();
         child_data_list.clear();
-        courseCId = SetUtil.HashSet2TreeSet((HashSet<String>) getCache().getAsObject(getCpId() + parentId));
+        courseCId = SetUtil.HashSet2TreeSet((HashSet<String>) TrainNetApp.getCache().getAsObject(getCpId() + parentId));
         if (courseCId != null) {
             for (String key : courseCId) {
                 setSpinnerOption(key);
@@ -606,13 +607,13 @@ public class TrainOnLineActivity extends BaseActivity {
             tv_child.setBackground(getResources().getDrawable(R.drawable.trainnet_coursebutton));
         }
         typeId = child_data_list.get(pos).getValue();
-        getCache().put(getCrId(), rootId);
-        getCache().put(getCtId(), typeId);
+        TrainNetApp.getCache().put(getCrId(), rootId);
+        TrainNetApp.getCache().put(getCtId(), typeId);
         new Thread(new NormalCourseListThread()).start();
     }
 
     private void setSpinnerOption(String key) {
-        spinnerOption = new SpinnerOption(key, getCache().getAsString(getCidName() + key));
+        spinnerOption = new SpinnerOption(key, TrainNetApp.getCache().getAsString(getCidName() + key));
     }
 
     private void setListView() {
@@ -662,13 +663,13 @@ public class TrainOnLineActivity extends BaseActivity {
     private void setDataList(boolean isCached) {
         if (isCached) {
             String courseType = null == typeId ? "" : typeId;
-            String AllOnLineCourseRefresh = getCache().getAsString(CacheKey.AllOnLineCourseRefresh + courseType);
+            String AllOnLineCourseRefresh = TrainNetApp.getCache().getAsString(CacheKey.AllOnLineCourseRefresh + courseType);
             if (!StringUtil.isNullOrEmpty(AllOnLineCourseRefresh)) {
-                courseList = getGson().fromJson(AllOnLineCourseRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+                courseList = TrainNetApp.getGson().fromJson(AllOnLineCourseRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
                 }.getType());
             } else {
                 courseList = TrainNetWebService.getInstance().OnlineCourseList(this, typeId);
-                getCache().put(CacheKey.AllOnLineCourseRefresh + courseType, getGson().toJson(courseList));
+                TrainNetApp.getCache().put(CacheKey.AllOnLineCourseRefresh + courseType, TrainNetApp.getGson().toJson(courseList));
             }
         } else {
             courseList = TrainNetWebService.getInstance().OnlineCourseList(this, typeId);
@@ -678,9 +679,9 @@ public class TrainOnLineActivity extends BaseActivity {
     class NormalCourseListThread implements Runnable {
         @Override
         public void run() {
-            coursePId = SetUtil.HashSet2TreeSet((HashSet<String>) getCache().getAsObject(getCpId()));
-            rootId = getCache().getAsString(getCrId());
-            typeId = getCache().getAsString(getCtId());
+            coursePId = SetUtil.HashSet2TreeSet((HashSet<String>) TrainNetApp.getCache().getAsObject(getCpId()));
+            rootId = TrainNetApp.getCache().getAsString(getCrId());
+            typeId = TrainNetApp.getCache().getAsString(getCtId());
             setCourseType();
         }
 
@@ -730,18 +731,18 @@ public class TrainOnLineActivity extends BaseActivity {
                 rootId = "-2";
                 for (String key : pcIdMap.keySet()) {
                     HashSet<String> hs = pcIdMap.get(key);
-                    getCache().put(getCpId() + key, hs);
-                    getCache().put(getCidName() + key, pcIdNameMap.get(key));
+                    TrainNetApp.getCache().put(getCpId() + key, hs);
+                    TrainNetApp.getCache().put(getCidName() + key, pcIdNameMap.get(key));
                     for (String key0 : pcIdMap.get(key)) {
-                        getCache().put(getCidName() + key0, pcIdNameMap.get(key0));
+                        TrainNetApp.getCache().put(getCidName() + key0, pcIdNameMap.get(key0));
                     }
                 }
-                getCache().put(getCpId(), parentKetSet);
-                coursePId = SetUtil.HashSet2TreeSet((HashSet<String>) getCache().getAsObject(getCpId()));
-                courseCId = SetUtil.HashSet2TreeSet((HashSet<String>) getCache().getAsObject(getCpId() + rootId));
+                TrainNetApp.getCache().put(getCpId(), parentKetSet);
+                coursePId = SetUtil.HashSet2TreeSet((HashSet<String>) TrainNetApp.getCache().getAsObject(getCpId()));
+                courseCId = SetUtil.HashSet2TreeSet((HashSet<String>) TrainNetApp.getCache().getAsObject(getCpId() + rootId));
                 mHandler.sendEmptyMessage(1);
             } else {
-                courseCId = SetUtil.HashSet2TreeSet((HashSet<String>) getCache().getAsObject(getCpId() + rootId));
+                courseCId = SetUtil.HashSet2TreeSet((HashSet<String>) TrainNetApp.getCache().getAsObject(getCpId() + rootId));
                 if (parent_data_list == null) {
                     mHandler.sendEmptyMessage(1);
                     return;

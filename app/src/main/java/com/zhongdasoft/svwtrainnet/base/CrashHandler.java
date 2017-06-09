@@ -107,9 +107,9 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 @Override
                 public void run() {
                     StringBuffer sb = getString(ex_);
-                    String name = MySharedPreferences.getInstance().getName(mContext);
-                    String userName = MySharedPreferences.getInstance().getUserName(mContext);
-                    String cellNumber = MySharedPreferences.getInstance().getString("CellNumber", mContext);
+                    String name = MySharedPreferences.getInstance().getName();
+                    String userName = MySharedPreferences.getInstance().getUserName();
+                    String cellNumber = MySharedPreferences.getInstance().getString("CellNumber");
                     String published = "";
                     if ("0".equals(MyProperty.getValueByKey("PublishMode", "0"))) {
                         published = "测试";

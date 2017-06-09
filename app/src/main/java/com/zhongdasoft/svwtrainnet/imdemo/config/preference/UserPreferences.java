@@ -1,11 +1,12 @@
 package com.zhongdasoft.svwtrainnet.imdemo.config.preference;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zhongdasoft.svwtrainnet.imdemo.DemoCache;
 import com.netease.nimlib.sdk.StatusBarNotificationConfig;
+import com.zhongdasoft.svwtrainnet.imdemo.DemoCache;
 
 /**
  * Created by hzxuwen on 2015/4/13.
@@ -109,6 +110,8 @@ public class UserPreferences {
             config.ledOnMs = jsonObject.getIntValue("ledonms");
             config.ledOffMs = jsonObject.getIntValue("ledoffms");
             config.titleOnlyShowAppName = jsonObject.getBoolean("titleOnlyShowAppName");
+            config.notificationFolded = jsonObject.getBoolean("notificationFolded");
+            config.notificationEntrance = (Class<? extends Activity>) Class.forName(jsonObject.getString("notificationEntrance"));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,6 +135,8 @@ public class UserPreferences {
             jsonObject.put("ledonms", config.ledOnMs);
             jsonObject.put("ledoffms", config.ledOffMs);
             jsonObject.put("titleOnlyShowAppName", config.titleOnlyShowAppName);
+            jsonObject.put("notificationFolded", config.notificationFolded);
+            jsonObject.put("notificationEntrance", config.notificationEntrance.getName());
         } catch (Exception e) {
             e.printStackTrace();
         }

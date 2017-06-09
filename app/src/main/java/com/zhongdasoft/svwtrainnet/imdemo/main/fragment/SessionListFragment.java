@@ -1,22 +1,10 @@
 package com.zhongdasoft.svwtrainnet.imdemo.main.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.netease.nim.uikit.NimUIKit;
-import com.zhongdasoft.svwtrainnet.R;
-import com.zhongdasoft.svwtrainnet.imdemo.config.preference.Preferences;
-import com.zhongdasoft.svwtrainnet.imdemo.login.LogoutHelper;
-import com.zhongdasoft.svwtrainnet.imdemo.main.activity.MultiportActivity;
-import com.zhongdasoft.svwtrainnet.imdemo.main.model.MainTab;
-import com.zhongdasoft.svwtrainnet.imdemo.main.reminder.ReminderManager;
-import com.zhongdasoft.svwtrainnet.imdemo.session.SessionHelper;
-import com.zhongdasoft.svwtrainnet.imdemo.session.extension.SnapChatAttachment;
-import com.zhongdasoft.svwtrainnet.imdemo.session.extension.StickerAttachment;
 import com.netease.nim.uikit.common.activity.UI;
 import com.netease.nim.uikit.common.util.log.LogUtil;
 import com.netease.nim.uikit.recent.RecentContactsCallback;
@@ -31,8 +19,15 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.MsgAttachment;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
-import com.zhongdasoft.svwtrainnet.module.home.LoginActivity;
-import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
+import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.imdemo.config.preference.Preferences;
+import com.zhongdasoft.svwtrainnet.imdemo.login.LogoutHelper;
+import com.zhongdasoft.svwtrainnet.imdemo.main.activity.MultiportActivity;
+import com.zhongdasoft.svwtrainnet.imdemo.main.model.MainTab;
+import com.zhongdasoft.svwtrainnet.imdemo.main.reminder.ReminderManager;
+import com.zhongdasoft.svwtrainnet.imdemo.session.SessionHelper;
+import com.zhongdasoft.svwtrainnet.imdemo.session.extension.SnapChatAttachment;
+import com.zhongdasoft.svwtrainnet.imdemo.session.extension.StickerAttachment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +41,65 @@ public class SessionListFragment extends MainTabFragment {
     private View notifyBar;
 
     private TextView notifyBarText;
+    /**
+     * 用户状态变化
+     */
+    Observer<StatusCode> userStatusObserver = new Observer<StatusCode>() {
 
+        @Override
+        public void onEvent(StatusCode code) {
+            if (code.wontAutoLogin()) {
+                kickOut(code);
+            } else {
+                if (code == StatusCode.NET_BROKEN) {
+                    notifyBar.setVisibility(View.VISIBLE);
+                    notifyBarText.setText(R.string.net_broken);
+                } else if (code == StatusCode.UNLOGIN) {
+                    notifyBar.setVisibility(View.VISIBLE);
+                    notifyBarText.setText(R.string.nim_status_unlogin);
+                } else if (code == StatusCode.CONNECTING) {
+                    notifyBar.setVisibility(View.VISIBLE);
+                    notifyBarText.setText(R.string.nim_status_connecting);
+                } else if (code == StatusCode.LOGINING) {
+                    notifyBar.setVisibility(View.VISIBLE);
+                    notifyBarText.setText(R.string.nim_status_logining);
+                } else {
+                    notifyBar.setVisibility(View.GONE);
+                }
+            }
+        }
+    };
     // 同时在线的其他端的信息
     private List<OnlineClient> onlineClients;
-
     private View multiportBar;
-
+    Observer<List<OnlineClient>> clientsObserver = new Observer<List<OnlineClient>>() {
+        @Override
+        public void onEvent(List<OnlineClient> onlineClients) {
+            SessionListFragment.this.onlineClients = onlineClients;
+            if (onlineClients == null || onlineClients.size() == 0) {
+                multiportBar.setVisibility(View.GONE);
+            } else {
+                multiportBar.setVisibility(View.VISIBLE);
+                TextView status = (TextView) multiportBar.findViewById(R.id.multiport_desc_label);
+                OnlineClient client = onlineClients.get(0);
+                switch (client.getClientType()) {
+                    case ClientType.Windows:
+                        status.setText(getString(R.string.multiport_logging) + getString(R.string.computer_version));
+                        break;
+                    case ClientType.Web:
+                        status.setText(getString(R.string.multiport_logging) + getString(R.string.web_version));
+                        break;
+                    case ClientType.iOS:
+                    case ClientType.Android:
+                        status.setText(getString(R.string.multiport_logging) + getString(R.string.mobile_version));
+                        break;
+                    default:
+                        multiportBar.setVisibility(View.GONE);
+                        break;
+                }
+            }
+        }
+    };
     private RecentContactsFragment fragment;
 
     public SessionListFragment() {
@@ -97,64 +145,6 @@ public class SessionListFragment extends MainTabFragment {
             }
         });
     }
-
-    /**
-     * 用户状态变化
-     */
-    Observer<StatusCode> userStatusObserver = new Observer<StatusCode>() {
-
-        @Override
-        public void onEvent(StatusCode code) {
-            if (code.wontAutoLogin()) {
-                kickOut(code);
-            } else {
-                if (code == StatusCode.NET_BROKEN) {
-                    notifyBar.setVisibility(View.VISIBLE);
-                    notifyBarText.setText(R.string.net_broken);
-                } else if (code == StatusCode.UNLOGIN) {
-                    notifyBar.setVisibility(View.VISIBLE);
-                    notifyBarText.setText(R.string.nim_status_unlogin);
-                } else if (code == StatusCode.CONNECTING) {
-                    notifyBar.setVisibility(View.VISIBLE);
-                    notifyBarText.setText(R.string.nim_status_connecting);
-                } else if (code == StatusCode.LOGINING) {
-                    notifyBar.setVisibility(View.VISIBLE);
-                    notifyBarText.setText(R.string.nim_status_logining);
-                } else {
-                    notifyBar.setVisibility(View.GONE);
-                }
-            }
-        }
-    };
-
-    Observer<List<OnlineClient>> clientsObserver = new Observer<List<OnlineClient>>() {
-        @Override
-        public void onEvent(List<OnlineClient> onlineClients) {
-            SessionListFragment.this.onlineClients = onlineClients;
-            if (onlineClients == null || onlineClients.size() == 0) {
-                multiportBar.setVisibility(View.GONE);
-            } else {
-                multiportBar.setVisibility(View.VISIBLE);
-                TextView status = (TextView) multiportBar.findViewById(R.id.multiport_desc_label);
-                OnlineClient client = onlineClients.get(0);
-                switch (client.getClientType()) {
-                    case ClientType.Windows:
-                        status.setText(getString(R.string.multiport_logging) + getString(R.string.computer_version));
-                        break;
-                    case ClientType.Web:
-                        status.setText(getString(R.string.multiport_logging) + getString(R.string.web_version));
-                        break;
-                    case ClientType.iOS:
-                    case ClientType.Android:
-                        status.setText(getString(R.string.multiport_logging) + getString(R.string.mobile_version));
-                        break;
-                    default:
-                        multiportBar.setVisibility(View.GONE);
-                        break;
-                }
-            }
-        }
-    };
 
     private void kickOut(StatusCode code) {
         Preferences.saveUserToken("");

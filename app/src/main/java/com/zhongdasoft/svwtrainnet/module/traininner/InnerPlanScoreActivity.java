@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
 import com.zhongdasoft.svwtrainnet.network.TrainNetWebService;
@@ -84,7 +85,7 @@ public class InnerPlanScoreActivity extends BaseActivity {
 //                    } else {
                     traineeList = TrainNetWebService.getInstance().InternalQueryTrainees(InnerPlanScoreActivity.this, planId);
                     setData();
-                    getCache().put(CacheKey.InnerPlanScoreRefresh + planId, getGson().toJson(listItem));
+                    TrainNetApp.getCache().put(CacheKey.InnerPlanScoreRefresh + planId, TrainNetApp.getGson().toJson(listItem));
 //                    }
                     runOnUiThread(new Runnable() {
                         @Override

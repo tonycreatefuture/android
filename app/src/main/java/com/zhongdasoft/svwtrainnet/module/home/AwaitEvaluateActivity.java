@@ -5,6 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.EvaluateFragmentPagerAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
@@ -44,7 +45,7 @@ public class AwaitEvaluateActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        getCache().put(CacheKey.HomeRefresh, "101");
+        TrainNetApp.getCache().put(CacheKey.HomeRefresh, "101");
     }
 
     @Override

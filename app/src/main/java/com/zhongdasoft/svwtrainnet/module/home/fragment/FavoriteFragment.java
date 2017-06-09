@@ -46,7 +46,7 @@ public class FavoriteFragment extends BaseLazyFragment {
     public static FavoriteFragment newInstance(WeakReference<? extends BaseActivity> wr) {
         FavoriteFragment fragment = new FavoriteFragment();
         fragment.wr = wr;
-        fragment.userName = MySharedPreferences.getInstance().getUserName(wr.get());
+        fragment.userName = MySharedPreferences.getInstance().getUserName();
         fragment.width = Scale.getScreen(wr).getPxWidth() / 40;
         return fragment;
     }

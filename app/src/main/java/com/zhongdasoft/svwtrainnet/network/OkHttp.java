@@ -136,7 +136,7 @@ public class OkHttp {
         if ("Login".equals(mParams.get("methodName")) || "LoginByName".equals(mParams.get("methodName"))) {
             mParams.put("device", PhoneInfo.getInstance().getDeviceXML(context));
         } else {
-            String accessToken = MySharedPreferences.getInstance().getAccessToken(context);
+            String accessToken = MySharedPreferences.getInstance().getAccessToken();
             mParams.put("accessToken", accessToken);
             mParams.put("deviceId", PhoneInfo.getInstance().getDeviceId(context));
         }

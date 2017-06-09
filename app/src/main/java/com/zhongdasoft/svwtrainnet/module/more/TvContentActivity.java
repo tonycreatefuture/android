@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewTreeObserver;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
@@ -87,7 +86,7 @@ public class TvContentActivity extends BaseActivity {
             isTv = false;
             tvTitle.setText(news);
             String id = intent.getStringExtra("item");
-            String accessToken = MySharedPreferences.getInstance().getAccessToken(this);
+            String accessToken = MySharedPreferences.getInstance().getAccessToken();
             url = MyProperty.getCurrentValue(getResources().getString(R.string.NewsUrl, accessToken, id));
         }
 

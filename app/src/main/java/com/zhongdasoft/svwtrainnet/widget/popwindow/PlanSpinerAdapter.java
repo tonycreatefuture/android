@@ -91,10 +91,10 @@ public class PlanSpinerAdapter<T> extends BaseAdapter {
         }
         final TextView[] tv = viewHolder.innerPlanEvent;
         Object item = getItem(pos);
-        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery", mContext);
+        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery");
         if (StringUtil.isNullOrEmpty(innerPlanQuery) || innerPlanQuery.length() != colNum * 2) {
             innerPlanQuery = mContext.getResources().getString(R.string.innerPlanQuery);
-            MySharedPreferences.getInstance().setStoreString("InnerPlanQuery", innerPlanQuery, mContext);
+            MySharedPreferences.getInstance().setStoreString("InnerPlanQuery", innerPlanQuery);
         }
         String[] plans = innerPlanQuery.split(",");
         if (pos == lineNum + 1) {
@@ -118,16 +118,16 @@ public class PlanSpinerAdapter<T> extends BaseAdapter {
                         public void onClick(View v) {
                             String[] lineCol = v.getTag().toString().split(",");
                             int line = Integer.parseInt(lineCol[0]);
-                            String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery", mContext);
+                            String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery");
                             StringBuilder sbStr = new StringBuilder(innerPlanQuery);
                             sbStr.deleteCharAt(2 * line);
                             sbStr.insert(2 * line, lineCol[1]);
-                            MySharedPreferences.getInstance().setStoreString("InnerPlanQuery", sbStr.toString(), mContext);
+                            MySharedPreferences.getInstance().setStoreString("InnerPlanQuery", sbStr.toString());
                             int pos = Integer.parseInt(lineCol[1]);
                             setBackground(tv, pos);
                             if (line == yearMonthRow) {
                                 TextView tv = (TextView) v;
-                                MySharedPreferences.getInstance().setStoreString("InnerPlanQuerySelectedYM", tv.getText().toString(), mContext);
+                                MySharedPreferences.getInstance().setStoreString("InnerPlanQuerySelectedYM", tv.getText().toString());
                             }
                         }
                     });
@@ -176,10 +176,10 @@ public class PlanSpinerAdapter<T> extends BaseAdapter {
     }
 
     private void setSelectedYearMonth(int i, TextView tv) {
-        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery", mContext);
+        String innerPlanQuery = MySharedPreferences.getInstance().getString("InnerPlanQuery");
         int colSelected = Integer.parseInt(innerPlanQuery.substring(2 * yearMonthRow, 2 * yearMonthRow + 1));
         if (i == colSelected) {
-            MySharedPreferences.getInstance().setStoreString("InnerPlanQuerySelectedYM", tv.getText().toString(), mContext);
+            MySharedPreferences.getInstance().setStoreString("InnerPlanQuerySelectedYM", tv.getText().toString());
         }
     }
 

@@ -10,17 +10,13 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.zhongdasoft.svwtrainnet.R;
-import com.zhongdasoft.svwtrainnet.greendao.Cache.ACache;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ActivityKey;
 import com.zhongdasoft.svwtrainnet.module.home.LoginActivity;
 import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
 import com.zhongdasoft.svwtrainnet.util.StringUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
-    private ACache mCache;
-    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +40,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             });
         }
-
-        mCache = ACache.get(this);
-        gson = new Gson();
         gotoLogin();
     }
 
@@ -72,14 +65,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
 //        Waiting.dismiss();
         super.onDestroy();
-    }
-
-    public ACache getCache() {
-        return mCache;
-    }
-
-    public Gson getGson() {
-        return gson;
     }
 
     /**
@@ -212,7 +197,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void gotoLogin() {
-        String accountLogout = MySharedPreferences.getInstance().getString("AccountLogout", this);
+        String accountLogout = MySharedPreferences.getInstance().getString("AccountLogout");
         if (!StringUtil.isNullOrEmpty(accountLogout) && "1".equals(accountLogout)) {
             Bundle bundle = new Bundle();
             bundle.putString("item", "1");

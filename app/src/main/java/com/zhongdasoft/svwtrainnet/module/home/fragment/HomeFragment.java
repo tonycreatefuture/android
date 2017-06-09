@@ -26,6 +26,7 @@ import java.lang.ref.WeakReference;
 public class HomeFragment extends BaseLazyFragment {
     WeakReference<? extends BaseActivity> wr;
     private ImageCycleView mAdView;
+//    private MainActivity activity;
 
     public static HomeFragment newInstance(WeakReference<? extends BaseActivity> wr) {
         HomeFragment fragment = new HomeFragment();
@@ -57,6 +58,7 @@ public class HomeFragment extends BaseLazyFragment {
 
     @Override
     protected void initRecyclerView() {
+//        activity = (MainActivity) getActivity();
         View v_body1 = wr.get().findViewById(R.id.home_body1);
         Screen screen = Scale.getScreen(wr);
         v_body1.getLayoutParams().height = (int) (224 / 640f * screen.getPxWidth());
@@ -70,6 +72,7 @@ public class HomeFragment extends BaseLazyFragment {
         if (null != mAdView) {
             mAdView.startImageCycle();
         }
+//        enableMsgNotification(false);
     }
 
     @Override
@@ -78,6 +81,7 @@ public class HomeFragment extends BaseLazyFragment {
         if (null != mAdView) {
             mAdView.pushImageCycle();
         }
+//        enableMsgNotification(true);
     }
 
     @Override

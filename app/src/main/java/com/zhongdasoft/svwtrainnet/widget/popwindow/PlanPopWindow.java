@@ -50,7 +50,7 @@ public class PlanPopWindow extends PopupWindow {
                 if (pos != 5) {
                     return;
                 } else {
-                    MySharedPreferences.getInstance().removeString("InnerPlanClick", mContext);
+                    MySharedPreferences.getInstance().removeString("InnerPlanClick");
                     dismiss();
                     if (mItemSelectListener != null) {
                         mItemSelectListener.onItemClick(pos);

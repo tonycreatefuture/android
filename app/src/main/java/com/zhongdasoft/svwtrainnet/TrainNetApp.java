@@ -13,10 +13,13 @@ import android.os.Environment;
 import android.support.multidex.MultiDex;
 import android.text.TextUtils;
 
-import com.facebook.react.*;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.facebook.stetho.Stetho;
+import com.google.gson.Gson;
 import com.microsoft.codepush.react.CodePush;
 import com.netease.nim.uikit.ImageLoaderKit;
 import com.netease.nim.uikit.NimUIKit;
@@ -44,13 +47,13 @@ import com.netease.nimlib.sdk.team.model.UpdateTeamAttachment;
 import com.netease.nimlib.sdk.uinfo.UserInfoProvider;
 import com.netease.nimlib.sdk.uinfo.model.NimUserInfo;
 import com.zhongdasoft.svwtrainnet.base.CrashHandler;
+import com.zhongdasoft.svwtrainnet.greendao.Cache.ACache;
 import com.zhongdasoft.svwtrainnet.greendao.GreenDaoManager;
 import com.zhongdasoft.svwtrainnet.imdemo.DemoCache;
 import com.zhongdasoft.svwtrainnet.imdemo.config.preference.Preferences;
 import com.zhongdasoft.svwtrainnet.imdemo.config.preference.UserPreferences;
 import com.zhongdasoft.svwtrainnet.imdemo.contact.ContactHelper;
 import com.zhongdasoft.svwtrainnet.imdemo.main.activity.ChatMainActivity;
-import com.zhongdasoft.svwtrainnet.imdemo.mixpush.DemoMixPushMessageHandler;
 import com.zhongdasoft.svwtrainnet.imdemo.mixpush.DemoPushContentProvider;
 import com.zhongdasoft.svwtrainnet.imdemo.session.SessionHelper;
 import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
@@ -76,10 +79,147 @@ public class TrainNetApp extends Application implements ReactApplication {
     private static Context mContext;
 
     private static TrainNetApp instance;
+    private static ACache mCache;
+    private static Gson gson;
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+
+        @Override
+        protected String getJSBundleFile() {
+            return CodePush.getJSBundleFile();
+        }
+
+        @Override
+        protected boolean getUseDeveloperSupport() {
+            return com.facebook.react.BuildConfig.DEBUG;
+        }
+
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage(),
+                    new JsReactPackage(),
+                    new CodePush("eiF1ajo5zWm7ZOzVmNF7sHAyHmWr4ksvOXqog", TrainNetApp.this, com.facebook.react.BuildConfig.DEBUG)
+            );
+        }
+    };
+    public VCTActivity containerActivity;
+    private BroadcastReceiver localeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent.getAction().equals(Intent.ACTION_LOCALE_CHANGED)) {
+                updateLocale();
+            }
+        }
+    };
+    private UserInfoProvider infoProvider = new UserInfoProvider() {
+        @Override
+        public UserInfo getUserInfo(String account) {
+            UserInfo user = NimUserInfoCache.getInstance().getUserInfo(account);
+            if (user == null) {
+                NimUserInfoCache.getInstance().getUserInfoFromRemote(account, null);
+            }
+
+            return user;
+        }
+
+        @Override
+        public int getDefaultIconResId() {
+            return R.drawable.chat_avatar_def;
+        }
+
+        @Override
+        public Bitmap getTeamIcon(String teamId) {
+            /**
+             * 注意：这里最好从缓存里拿，如果读取本地头像可能导致UI进程阻塞，导致通知栏提醒延时弹出。
+             */
+            // 从内存缓存中查找群头像
+            Team team = TeamDataCache.getInstance().getTeamById(teamId);
+            if (team != null) {
+                Bitmap bm = ImageLoaderKit.getNotificationBitmapFromCache(team.getIcon());
+                if (bm != null) {
+                    return bm;
+                }
+            }
+
+            // 默认图
+            Drawable drawable = getResources().getDrawable(R.mipmap.logo);//R.drawable.nim_avatar_group);
+            if (drawable instanceof BitmapDrawable) {
+                return ((BitmapDrawable) drawable).getBitmap();
+            }
+
+            return null;
+        }
+
+        @Override
+        public Bitmap getAvatarForMessageNotifier(String account) {
+            /**
+             * 注意：这里最好从缓存里拿，如果读取本地头像可能导致UI进程阻塞，导致通知栏提醒延时弹出。
+             */
+//            return BitmapFactory.decodeResource(getResources(), R.mipmap.logo);
+            UserInfo user = getUserInfo(account);
+            return (user != null) ? ImageLoaderKit.getNotificationBitmapFromCache(user.getAvatar()) : null;
+        }
+
+        @Override
+        public String getDisplayNameForMessageNotifier(String account, String sessionId, SessionTypeEnum sessionType) {
+            String nick = null;
+            if (sessionType == SessionTypeEnum.P2P) {
+                nick = NimUserInfoCache.getInstance().getAlias(account);
+            } else if (sessionType == SessionTypeEnum.Team) {
+                nick = TeamDataCache.getInstance().getTeamNick(sessionId, account);
+                if (TextUtils.isEmpty(nick)) {
+                    nick = NimUserInfoCache.getInstance().getAlias(account);
+                }
+            }
+            // 返回null，交给sdk处理。如果对方有设置nick，sdk会显示nick
+            if (TextUtils.isEmpty(nick)) {
+                return null;
+            }
+
+            return nick;
+        }
+    };
+    private ContactProvider contactProvider = new ContactProvider() {
+        @Override
+        public List<UserInfoProvider.UserInfo> getUserInfoOfMyFriends() {
+            List<NimUserInfo> nimUsers = NimUserInfoCache.getInstance().getAllUsersOfMyFriend();
+            List<UserInfoProvider.UserInfo> users = new ArrayList<>(nimUsers.size());
+            if (!nimUsers.isEmpty()) {
+                users.addAll(nimUsers);
+            }
+
+            return users;
+        }
+
+        @Override
+        public int getMyFriendsCount() {
+            return FriendDataCache.getInstance().getMyFriendCounts();
+        }
+
+        @Override
+        public String getUserDisplayName(String account) {
+            return NimUserInfoCache.getInstance().getUserDisplayName(account);
+        }
+    };
+    private MessageNotifierCustomization messageNotifierCustomization = new MessageNotifierCustomization() {
+        @Override
+        public String makeNotifyContent(String nick, IMMessage message) {
+            return null; // 采用SDK默认文案
+        }
+
+        @Override
+        public String makeTicker(String nick, IMMessage message) {
+            return null; // 采用SDK默认文案
+        }
+    };
+
     public synchronized static TrainNetApp getInstance() {
         return instance;
     }
-    public VCTActivity containerActivity;
+
+    public static Context getContext() {
+        return mContext;
+    }
 
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(newBase);
@@ -91,6 +231,8 @@ public class TrainNetApp extends Application implements ReactApplication {
         super.onCreate();
         mContext = getApplicationContext();
         instance = this;
+        mCache = ACache.get(mContext);
+        gson = new Gson();
         GreenDaoManager.getInstance();
 
 //        HttpsUtil.SSLParams sslParams = HttpsUtil.getSslSocketFactory(null, null, null);
@@ -117,7 +259,7 @@ public class TrainNetApp extends Application implements ReactApplication {
         // 注册小米推送appID 、appKey 以及在云信管理后台添加的小米推送证书名称，该逻辑放在 NIMClient init 之前
         NIMPushClient.registerMiPush(this, "DEMO_MI_PUSH", "2882303761517502883", "5671750254883");
         // 注册自定义小米推送消息处理，这个是可选项
-        NIMPushClient.registerMixPushMessageHandler(new DemoMixPushMessageHandler());
+//        NIMPushClient.registerMixPushMessageHandler(new DemoMixPushMessageHandler());
         NIMClient.init(this, getLoginInfo(), getOptions());
         if (inMainProcess()) {
             // init pinyin
@@ -142,6 +284,7 @@ public class TrainNetApp extends Application implements ReactApplication {
             // 注册语言变化监听
             registerLocaleReceiver(true);
         }
+
         Stetho.initialize(
                 Stetho.newInitializerBuilder(this)
                         .enableDumpapp(Stetho.defaultDumperPluginsProvider(this))
@@ -153,20 +296,53 @@ public class TrainNetApp extends Application implements ReactApplication {
         SoLoader.init(this, /* native exopackage */ false);
     }
 
-    public static Context getContext() {
-        return mContext;
-    }
-
     public boolean inMainProcess() {
         String packageName = getPackageName();
         String processName = SystemUtil.getProcessName(this);
         return packageName.equals(processName);
     }
 
+//    /**
+//     * 音视频通话配置与监听
+//     */
+//    private void enableAVChat() {
+//        registerAVChatIncomingCallObserver(true);
+//    }
+//
+//    private void registerAVChatIncomingCallObserver(boolean register) {
+//        AVChatManager.getInstance().observeIncomingCall(new Observer<AVChatData>() {
+//            @Override
+//            public void onEvent(AVChatData data) {
+//                String extra = data.getExtra();
+//                Log.e("Extra", "Extra Message->" + extra);
+//                // 有网络来电打开AVChatActivity
+//                AVChatProfile.getInstance().setAVChatting(true);
+//                AVChatActivity.launch(DemoCache.getContext(), data, AVChatActivity.FROM_BROADCASTRECEIVER);
+//            }
+//        }, register);
+//    }
+
+//    /**
+//     * 白板实时时会话配置与监听
+//     */
+//    private void enableRTS() {
+//        registerRTSIncomingObserver(true);
+//    }
+//
+//
+//    private void registerRTSIncomingObserver(boolean register) {
+//        RTSManager.getInstance().observeIncomingSession(new Observer<RTSData>() {
+//            @Override
+//            public void onEvent(RTSData rtsData) {
+//                RTSActivity.incomingSession(DemoCache.getContext(), rtsData, RTSActivity.FROM_BROADCAST_RECEIVER);
+//            }
+//        }, register);
+//    }
+
     private LoginInfo getLoginInfo() {
         String account = Preferences.getUserAccount();
         String token = Preferences.getUserToken();
-        String accessToken = MySharedPreferences.getInstance().getString("AccessToken", this);
+        String accessToken = MySharedPreferences.getInstance().getString("AccessToken");
 
         if (!TextUtils.isEmpty(account) && !TextUtils.isEmpty(token)) {
             DemoCache.setAccount(account.toLowerCase());
@@ -190,7 +366,7 @@ public class TrainNetApp extends Application implements ReactApplication {
         config.notificationSmallIconId = R.mipmap.logo;
 
         // 通知铃声的uri字符串
-        config.notificationSound = "android.resource://com.zhongdasoft.svwtrainnet.imdemo/raw/msg";
+        config.notificationSound = "android.resource://com.zhongdasoft.svwtrainnet/raw/msg";
 
         // 呼吸灯配置
         config.ledARGB = Color.GREEN;
@@ -260,43 +436,6 @@ public class TrainNetApp extends Application implements ReactApplication {
         });
     }
 
-//    /**
-//     * 音视频通话配置与监听
-//     */
-//    private void enableAVChat() {
-//        registerAVChatIncomingCallObserver(true);
-//    }
-//
-//    private void registerAVChatIncomingCallObserver(boolean register) {
-//        AVChatManager.getInstance().observeIncomingCall(new Observer<AVChatData>() {
-//            @Override
-//            public void onEvent(AVChatData data) {
-//                String extra = data.getExtra();
-//                Log.e("Extra", "Extra Message->" + extra);
-//                // 有网络来电打开AVChatActivity
-//                AVChatProfile.getInstance().setAVChatting(true);
-//                AVChatActivity.launch(DemoCache.getContext(), data, AVChatActivity.FROM_BROADCASTRECEIVER);
-//            }
-//        }, register);
-//    }
-
-//    /**
-//     * 白板实时时会话配置与监听
-//     */
-//    private void enableRTS() {
-//        registerRTSIncomingObserver(true);
-//    }
-//
-//
-//    private void registerRTSIncomingObserver(boolean register) {
-//        RTSManager.getInstance().observeIncomingSession(new Observer<RTSData>() {
-//            @Override
-//            public void onEvent(RTSData rtsData) {
-//                RTSActivity.incomingSession(DemoCache.getContext(), rtsData, RTSActivity.FROM_BROADCAST_RECEIVER);
-//            }
-//        }, register);
-//    }
-
     private void registerLocaleReceiver(boolean register) {
         if (register) {
             updateLocale();
@@ -306,15 +445,6 @@ public class TrainNetApp extends Application implements ReactApplication {
             unregisterReceiver(localeReceiver);
         }
     }
-
-    private BroadcastReceiver localeReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intent.ACTION_LOCALE_CHANGED)) {
-                updateLocale();
-            }
-        }
-    };
 
     private void updateLocale() {
         NimStrings strings = new NimStrings();
@@ -349,133 +479,17 @@ public class TrainNetApp extends Application implements ReactApplication {
         NimUIKit.CustomPushContentProvider(new DemoPushContentProvider());
     }
 
-    private UserInfoProvider infoProvider = new UserInfoProvider() {
-        @Override
-        public UserInfo getUserInfo(String account) {
-            UserInfo user = NimUserInfoCache.getInstance().getUserInfo(account);
-            if (user == null) {
-                NimUserInfoCache.getInstance().getUserInfoFromRemote(account, null);
-            }
-
-            return user;
-        }
-
-        @Override
-        public int getDefaultIconResId() {
-            return R.drawable.chat_avatar_def;
-        }
-
-        @Override
-        public Bitmap getTeamIcon(String teamId) {
-            /**
-             * 注意：这里最好从缓存里拿，如果读取本地头像可能导致UI进程阻塞，导致通知栏提醒延时弹出。
-             */
-            // 从内存缓存中查找群头像
-            Team team = TeamDataCache.getInstance().getTeamById(teamId);
-            if (team != null) {
-                Bitmap bm = ImageLoaderKit.getNotificationBitmapFromCache(team.getIcon());
-                if (bm != null) {
-                    return bm;
-                }
-            }
-
-            // 默认图
-            Drawable drawable = getResources().getDrawable(R.drawable.nim_avatar_group);
-            if (drawable instanceof BitmapDrawable) {
-                return ((BitmapDrawable) drawable).getBitmap();
-            }
-
-            return null;
-        }
-
-        @Override
-        public Bitmap getAvatarForMessageNotifier(String account) {
-            /**
-             * 注意：这里最好从缓存里拿，如果读取本地头像可能导致UI进程阻塞，导致通知栏提醒延时弹出。
-             */
-            UserInfo user = getUserInfo(account);
-            return (user != null) ? ImageLoaderKit.getNotificationBitmapFromCache(user.getAvatar()) : null;
-        }
-
-        @Override
-        public String getDisplayNameForMessageNotifier(String account, String sessionId, SessionTypeEnum sessionType) {
-            String nick = null;
-            if (sessionType == SessionTypeEnum.P2P) {
-                nick = NimUserInfoCache.getInstance().getAlias(account);
-            } else if (sessionType == SessionTypeEnum.Team) {
-                nick = TeamDataCache.getInstance().getTeamNick(sessionId, account);
-                if (TextUtils.isEmpty(nick)) {
-                    nick = NimUserInfoCache.getInstance().getAlias(account);
-                }
-            }
-            // 返回null，交给sdk处理。如果对方有设置nick，sdk会显示nick
-            if (TextUtils.isEmpty(nick)) {
-                return null;
-            }
-
-            return nick;
-        }
-    };
-
-    private ContactProvider contactProvider = new ContactProvider() {
-        @Override
-        public List<UserInfoProvider.UserInfo> getUserInfoOfMyFriends() {
-            List<NimUserInfo> nimUsers = NimUserInfoCache.getInstance().getAllUsersOfMyFriend();
-            List<UserInfoProvider.UserInfo> users = new ArrayList<>(nimUsers.size());
-            if (!nimUsers.isEmpty()) {
-                users.addAll(nimUsers);
-            }
-
-            return users;
-        }
-
-        @Override
-        public int getMyFriendsCount() {
-            return FriendDataCache.getInstance().getMyFriendCounts();
-        }
-
-        @Override
-        public String getUserDisplayName(String account) {
-            return NimUserInfoCache.getInstance().getUserDisplayName(account);
-        }
-    };
-
-    private MessageNotifierCustomization messageNotifierCustomization = new MessageNotifierCustomization() {
-        @Override
-        public String makeNotifyContent(String nick, IMMessage message) {
-            return null; // 采用SDK默认文案
-        }
-
-        @Override
-        public String makeTicker(String nick, IMMessage message) {
-            return null; // 采用SDK默认文案
-        }
-    };
-
-    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-
-        @Override
-        protected String getJSBundleFile() {
-            return CodePush.getJSBundleFile();
-        }
-
-        @Override
-        protected boolean getUseDeveloperSupport() {
-            return com.facebook.react.BuildConfig.DEBUG;
-        }
-
-        @Override
-        protected List<ReactPackage> getPackages() {
-            return Arrays.<ReactPackage>asList(
-                    new MainReactPackage(),
-                    new JsReactPackage(),
-                    new CodePush("eiF1ajo5zWm7ZOzVmNF7sHAyHmWr4ksvOXqog", TrainNetApp.this, com.facebook.react.BuildConfig.DEBUG)
-            );
-        }
-    };
-
     @Override
     public ReactNativeHost getReactNativeHost() {
         return mReactNativeHost;
+    }
+
+
+    public static ACache getCache() {
+        return mCache;
+    }
+
+    public static Gson getGson() {
+        return gson;
     }
 }

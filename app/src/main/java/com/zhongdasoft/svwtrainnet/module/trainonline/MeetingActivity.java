@@ -7,6 +7,7 @@ import android.widget.ListView;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.MeetingListViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.CacheKey;
@@ -36,13 +37,13 @@ public class MeetingActivity extends BaseActivity {
             @Override
             public void run() {
                 if (isCached) {
-                    String MeetingCourseRefresh = getCache().getAsString(CacheKey.MeetingCourseRefresh);
+                    String MeetingCourseRefresh = TrainNetApp.getCache().getAsString(CacheKey.MeetingCourseRefresh);
                     if (!StringUtil.isNullOrEmpty(MeetingCourseRefresh)) {
-                        courseList = getGson().fromJson(MeetingCourseRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
+                        courseList = TrainNetApp.getGson().fromJson(MeetingCourseRefresh, new TypeToken<ArrayList<HashMap<String, Object>>>() {
                         }.getType());
                     } else {
                         courseList = TrainNetWebService.getInstance().MeetList(MeetingActivity.this);
-                        getCache().put(CacheKey.MeetingCourseRefresh, getGson().toJson(courseList));
+                        TrainNetApp.getCache().put(CacheKey.MeetingCourseRefresh, TrainNetApp.getGson().toJson(courseList));
                     }
                 } else {
                     courseList = TrainNetWebService.getInstance().MeetList(MeetingActivity.this);

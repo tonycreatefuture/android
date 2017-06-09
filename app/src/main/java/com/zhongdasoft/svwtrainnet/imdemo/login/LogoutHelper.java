@@ -1,16 +1,10 @@
 package com.zhongdasoft.svwtrainnet.imdemo.login;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.view.animation.Animation;
-
 import com.netease.nim.uikit.LoginSyncDataStatusObserver;
 import com.netease.nim.uikit.NimUIKit;
 import com.netease.nim.uikit.common.ui.drop.DropManager;
 import com.zhongdasoft.svwtrainnet.imdemo.DemoCache;
 import com.zhongdasoft.svwtrainnet.imdemo.chatroom.helper.ChatRoomHelper;
-import com.zhongdasoft.svwtrainnet.module.home.LoginActivity;
-import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
 
 /**
  * 注销帮助类
@@ -24,6 +18,5 @@ public class LogoutHelper {
         DemoCache.clear();
         LoginSyncDataStatusObserver.getInstance().reset();
         DropManager.getInstance().destroy();
-        MySharedPreferences.getInstance().setStoreString("AccountLogout", "1", NimUIKit.getContext());
     }
 }

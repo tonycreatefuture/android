@@ -49,7 +49,7 @@ public class AppUpdate {
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 0:
-                    MySharedPreferences.getInstance().setStoreString("isUpdate", "1", activity);
+                    MySharedPreferences.getInstance().setStoreString("isUpdate", "1");
                     showNoticeDialog();
                     break;
                 case 1:
@@ -82,7 +82,7 @@ public class AppUpdate {
                             return false;
                         }
                     });
-                    String tmpUserName = MySharedPreferences.getInstance().getUserName(activity);
+                    String tmpUserName = MySharedPreferences.getInstance().getUserName();
                     if (!StringUtil.isNullOrEmpty(tmpUserName)) {
                         userName.setText(tmpUserName);
                     }

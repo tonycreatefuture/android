@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhongdasoft.svwtrainnet.R;
+import com.zhongdasoft.svwtrainnet.TrainNetApp;
 import com.zhongdasoft.svwtrainnet.adapter.BaseListViewAdapter;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ActivityKey;
@@ -117,7 +118,7 @@ public class NormalCourseContentActivity extends BaseActivity {
             ListViewUtil.setListItem(listItem, getResources().getString(R.string.course_apply), ListViewUtil.PaperEvent);
         } else {
             tvTitle.setText(R.string.title_normalcourselist);
-            String suitMeCourse = getCache().getAsString(CacheKey.SuitMeCourse);
+            String suitMeCourse = TrainNetApp.getCache().getAsString(CacheKey.SuitMeCourse);
             if (null != suitMeCourse && suitMeCourse.contains(courseContentList.get("CourseNo").toString() + ",,")) {
                 ListViewUtil.setListItem(listItem, getResources().getString(R.string.course_apply), ListViewUtil.PaperEvent);
             } else {
@@ -173,7 +174,7 @@ public class NormalCourseContentActivity extends BaseActivity {
 
         @Override
         public void run() {
-            String CourseContentRefresh = getCache().getAsString(CacheKey.CourseContentRefresh + courseNo);
+            String CourseContentRefresh = TrainNetApp.getCache().getAsString(CacheKey.CourseContentRefresh + courseNo);
             if (!NetManager.isNetworkConnected(NormalCourseContentActivity.this) && StringUtil.isNullOrEmptyOrEmptySet(CourseContentRefresh)) {
                 runOnUiThread(new Runnable() {
                     @Override
@@ -185,11 +186,11 @@ public class NormalCourseContentActivity extends BaseActivity {
                 return;
             }
             if (!StringUtil.isNullOrEmptyOrEmptySet(CourseContentRefresh)) {
-                courseContentList = getGson().fromJson(CourseContentRefresh, new TypeToken<HashMap<String, Object>>() {
+                courseContentList = TrainNetApp.getGson().fromJson(CourseContentRefresh, new TypeToken<HashMap<String, Object>>() {
                 }.getType());
             } else {
                 courseContentList = TrainNetWebService.getInstance().GetCourse(NormalCourseContentActivity.this, courseNo);
-                getCache().put(CacheKey.CourseContentRefresh + courseNo, getGson().toJson(courseContentList));
+                TrainNetApp.getCache().put(CacheKey.CourseContentRefresh + courseNo, TrainNetApp.getGson().toJson(courseContentList));
             }
             runOnUiThread(new Runnable() {
                 @Override
@@ -206,7 +207,7 @@ public class NormalCourseContentActivity extends BaseActivity {
             switch (msg.what) {
                 case REFRESH_COMPLETE:
                     if (NetManager.isNetworkConnected(NormalCourseContentActivity.this)) {
-                        getCache().remove(CacheKey.CourseContentRefresh + courseNo);
+                        TrainNetApp.getCache().remove(CacheKey.CourseContentRefresh + courseNo);
                         new Thread(new NormalCourseContentThread()).start();
                     } else {
                         ToastUtil.show(NormalCourseContentActivity.this, getResources().getString(R.string.refreshByNetError));
