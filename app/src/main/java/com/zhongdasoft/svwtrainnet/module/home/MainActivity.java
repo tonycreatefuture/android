@@ -28,7 +28,6 @@ import com.zhongdasoft.svwtrainnet.imdemo.DemoCache;
 import com.zhongdasoft.svwtrainnet.imdemo.main.activity.ChatMainActivity;
 import com.zhongdasoft.svwtrainnet.module.more.ScanActivity;
 import com.zhongdasoft.svwtrainnet.util.CameraUtil;
-import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
 import com.zhongdasoft.svwtrainnet.util.StringUtil;
 import com.zhongdasoft.svwtrainnet.util.ToastUtil;
 import com.zhongdasoft.svwtrainnet.widget.NoScrollViewPaper;
@@ -60,8 +59,10 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onEvent(StatusCode code) {
             if (code.wontAutoLogin()) {
-                MySharedPreferences.getInstance().setStoreString("AccountLogout", "1");
-                gotoLogin();
+                Bundle bundle = new Bundle();
+                bundle.putString("item", "1");
+                bundle.putString("reason", getResources().getString(R.string.loginByOtherDevice));
+                readyGoThenKill(LoginActivity.class, bundle);
             } else {
             }
         }
@@ -78,7 +79,7 @@ public class MainActivity extends BaseActivity {
     Observer<List<RecentContact>> messageObserver = new Observer<List<RecentContact>>() {
         @Override
         public void onEvent(List<RecentContact> recentContacts) {
-            unreadNumChanged();
+            unreadNumChanged(true);
         }
     };
     private long exitTime = 0;
@@ -164,7 +165,7 @@ public class MainActivity extends BaseActivity {
             subTitle.setVisibility(View.VISIBLE);
             profile.setVisibility(View.VISIBLE);
             msg.setVisibility(View.VISIBLE);
-            unreadNumChanged();
+            unreadNumChanged(false);
         } else {
             title.setText(textIds[pos]);
             subTitle.setVisibility(View.GONE);
@@ -231,13 +232,11 @@ public class MainActivity extends BaseActivity {
             setImageText(iPos, true);
             viewPager.setCurrentItem(iPos, false);
         }
-//        unreadNumChanged();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-//        unreadNumChanged();
     }
 
     @Override
@@ -247,11 +246,22 @@ public class MainActivity extends BaseActivity {
         registerObservers(false);
     }
 
-    public void unreadNumChanged() {
+    public void unreadNumChanged(boolean isObserver) {
         if (null == DemoCache.getAccount()) {
             return;
         }
-        int unreadNum = NIMClient.getService(MsgService.class).getTotalUnreadCount();
+        int unreadNum;
+        if (isObserver) {
+            unreadNum = NIMClient.getService(MsgService.class).getTotalUnreadCount();
+            TrainNetApp.getCache().put(CacheKey.NimUnreadNum, unreadNum + "");
+        } else {
+            String strUnreadNum = TrainNetApp.getCache().getAsString(CacheKey.NimUnreadNum);
+            if (StringUtil.isNullOrEmpty(strUnreadNum)) {
+                unreadNum = 0;
+            } else {
+                unreadNum = Integer.parseInt(strUnreadNum);
+            }
+        }
         if (unreadNum > 0) {
             if (msg.getVisibility() == View.VISIBLE) {
                 badgeView.setVisibility(View.VISIBLE);

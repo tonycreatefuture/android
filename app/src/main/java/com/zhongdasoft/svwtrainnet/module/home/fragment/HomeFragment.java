@@ -7,6 +7,7 @@ import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.base.BaseActivity;
 import com.zhongdasoft.svwtrainnet.base.BaseLazyFragment;
 import com.zhongdasoft.svwtrainnet.module.home.HomeHandler;
+import com.zhongdasoft.svwtrainnet.module.home.MainActivity;
 import com.zhongdasoft.svwtrainnet.util.Scale;
 import com.zhongdasoft.svwtrainnet.util.Screen;
 import com.zhongdasoft.svwtrainnet.widget.ImageCycleView;
@@ -63,7 +64,7 @@ public class HomeFragment extends BaseLazyFragment {
         Screen screen = Scale.getScreen(wr);
         v_body1.getLayoutParams().height = (int) (224 / 640f * screen.getPxWidth());
         mAdView = (ImageCycleView) wr.get().findViewById(R.id.ad_view);
-        new HomeHandler(wr);
+        new HomeHandler(wr, (MainActivity) getActivity());
     }
 
     @Override

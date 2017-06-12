@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -77,6 +78,8 @@ public class InnerPlanCreateUpdateActivity extends BaseActivity {
     private OnClickListener innerPlanCourseClick = new OnClickListener() {
         @Override
         public void onClick(View v) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(innerPlanCourse.getWindowToken(), 0);
             //此处弹出窗口选择课程，选择课程后窗口关闭
             DialogUtil.getInstance().showCourseDialog(wr, "请选择培训课程", new DialogUtil.CourseDismiss() {
                 @Override

@@ -136,7 +136,7 @@ public class InnerCourse {
     }
 
     private void parentClick(int pos) {
-        if (pos < 0 || pos > parent_data_list.size()) {
+        if (pos < 0 || pos >= parent_data_list.size()) {
             return;
         }
         if (pPos != pos) {
@@ -199,7 +199,7 @@ public class InnerCourse {
     }
 
     private void childClick(int pos) {
-        if (pos < 0 || pos > child_data_list.size()) {
+        if (pos < 0 || pos >= child_data_list.size()) {
             return;
         }
         //Waiting.show(activity, activity.getResources().getString(R.string.Loading));

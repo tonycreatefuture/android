@@ -80,7 +80,6 @@ public class LoginHandler extends Handler {
                     setUserMenu();
                     setCounter();
                 } else {
-                    MySharedPreferences.getInstance().setStoreString("AccountLogout", "0");
                     String Message = timeMap.get(activity.getResources().getString(R.string.Message)).toString();
                     if (ReturnCode == 0) {
                         // 登录验证成功

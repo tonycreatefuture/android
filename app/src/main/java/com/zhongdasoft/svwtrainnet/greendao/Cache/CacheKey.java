@@ -48,4 +48,5 @@ public class CacheKey {
     public static final String RouterRegister = "RouterRegister";
     public static final String MeetingCourseRefresh = "MeetingCourseRefresh";
     public static final String NimAccountRefresh = "NimAccountRefresh";
+    public static final String NimUnreadNum = "NimUnreadNum";
 }

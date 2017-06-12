@@ -529,7 +529,7 @@ public class TrainOnLineActivity extends BaseActivity {
     }
 
     private void parentClick(int pos) {
-        if (pos < 0 || pos > parent_data_list.size()) {
+        if (pos < 0 || pos >= parent_data_list.size()) {
             return;
         }
         if (pPos != pos) {
@@ -593,7 +593,7 @@ public class TrainOnLineActivity extends BaseActivity {
     }
 
     private void childClick(int pos) {
-        if (pos < 0 || pos > child_data_list.size()) {
+        if (pos < 0 || pos >= child_data_list.size()) {
             return;
         }
         cPos = pos;

@@ -68,6 +68,7 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
      */
     private DrawerLayout mDrawerLayout;
     private BaseActivity activity;
+    private MainActivity mActivity;
     private WeakReference<? extends BaseActivity> myActivity;
     private ImageButton btnPerson;
     //    private Button btnLoginOut;
@@ -121,9 +122,10 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
         }
     };
 
-    public HomeHandler(WeakReference<? extends BaseActivity> myActivity) {
+    public HomeHandler(WeakReference<? extends BaseActivity> myActivity, MainActivity mainActivity) {
         this.myActivity = myActivity;
         this.activity = myActivity.get();
+        this.mActivity = mainActivity;
         mSwipeLayout = (SwipeRefreshLayout) activity.findViewById(R.id.id_swipe_ly);
         mSwipeLayout.setOnRefreshListener(this);
         mSwipeLayout.setColorSchemeResources(android.R.color.holo_blue_light, android.R.color.holo_red_light, android.R.color.holo_orange_light, android.R.color.holo_green_light);
@@ -303,6 +305,8 @@ public class HomeHandler implements SwipeRefreshLayout.OnRefreshListener {
 
                 // 构建缓存
                 DataCacheManager.buildDataCacheAsync();
+
+                mActivity.unreadNumChanged(true);
             }
 
             @Override

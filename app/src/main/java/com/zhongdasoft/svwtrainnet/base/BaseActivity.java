@@ -12,9 +12,6 @@ import android.widget.TextView;
 
 import com.zhongdasoft.svwtrainnet.R;
 import com.zhongdasoft.svwtrainnet.greendao.Cache.ActivityKey;
-import com.zhongdasoft.svwtrainnet.module.home.LoginActivity;
-import com.zhongdasoft.svwtrainnet.util.MySharedPreferences;
-import com.zhongdasoft.svwtrainnet.util.StringUtil;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -40,7 +37,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             });
         }
-        gotoLogin();
     }
 
     protected abstract int getLayoutId();
@@ -50,14 +46,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        gotoLogin();
         overridePendingTransition(Animation.INFINITE, Animation.INFINITE);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        gotoLogin();
         overridePendingTransition(Animation.INFINITE, Animation.INFINITE);
     }
 
@@ -194,15 +188,5 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public android.os.Handler getHandler() {
         return null;
-    }
-
-    public void gotoLogin() {
-        String accountLogout = MySharedPreferences.getInstance().getString("AccountLogout");
-        if (!StringUtil.isNullOrEmpty(accountLogout) && "1".equals(accountLogout)) {
-            Bundle bundle = new Bundle();
-            bundle.putString("item", "1");
-            bundle.putString("reason", getResources().getString(R.string.loginByOtherDevice));
-            readyGoThenKill(LoginActivity.class, bundle);
-        }
     }
 }

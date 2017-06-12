@@ -34,23 +34,6 @@ public class TrainNetWebService {
         return instance;
     }
 
-//    /**
-//     * 转到登录界面
-//     *
-//     * @param context 上下文对象
-//     * @param reason  原因
-//     */
-//    private synchronized void gotoLogin(Context context, String reason) {
-//        String userName = MySharedPreferences.getInstance().getUserName(context);
-//        if (!StringUtil.isNullOrEmpty(userName)) {
-//            MySharedPreferences.getInstance().removeString("userName", context);
-//            Bundle bundle = new Bundle();
-//            bundle.putString("item", "1");
-//            bundle.putString("reason", reason);
-//            ((BaseActivity) context).readyGoThenKill(LoginActivity.class, bundle);
-//        }
-//    }
-
     /**
      * 异常错误信息
      *
@@ -114,8 +97,6 @@ public class TrainNetWebService {
     private ArrayList<HashMap<String, Object>> handleEventList(Context context, HashMap<String, String> mParams) {
         boolean isConnected = NetManager.isNetworkConnected(context);
         if (!isConnected) {
-//            gotoLogin(context, context.getResources().getString(R.string.showByNetError));
-//            ((BaseActivity) context).gotoLogin();
             return netErrorMapList(context, NetCode);
         }
         ArrayList<HashMap<String, Object>> listResult;
@@ -133,9 +114,7 @@ public class TrainNetWebService {
         String key = context.getResources().getString(R.string.ReturnCode);
         HashMap<String, Object> mapResult = filterSimpleMap(context, listResult, methodName + "Result");
         if (mapResult.containsKey(key) && "-1".equals(mapResult.get(key))) {
-//            gotoLogin(context, context.getResources().getString(R.string.loginByOtherDevice));
-            MySharedPreferences.getInstance().setStoreString("AccountLogout", "1");
-//            ((BaseActivity) context).gotoLogin();
+            //此种情况通过网易云信不同客户端踢人方式实现
         }
         if (StringUtil.isNullOrEmpty(listKey)) {
             return listResult;
@@ -177,8 +156,6 @@ public class TrainNetWebService {
     private HashMap<String, Object> handleEventMap(Context context, HashMap<String, String> mParams) {
         boolean isConnected = NetManager.isNetworkConnected(context);
         if (!isConnected) {
-//            gotoLogin(context, context.getResources().getString(R.string.showByNetError));
-//            ((BaseActivity) context).gotoLogin();
             return netErrorMap(context, NetCode);
         }
         ArrayList<HashMap<String, Object>> listResult;
@@ -195,9 +172,7 @@ public class TrainNetWebService {
         String key = context.getResources().getString(R.string.ReturnCode);
         HashMap<String, Object> mapResult = filterSimpleMap(context, listResult, methodName + "Result");
         if (null != mapResult && mapResult.containsKey(key) && "-1".equals(mapResult.get(key))) {
-//            gotoLogin(context, context.getResources().getString(R.string.loginByOtherDevice));
-            MySharedPreferences.getInstance().setStoreString("AccountLogout", "1");
-//            ((BaseActivity) context).gotoLogin();
+            //此种情况通过网易云信不同客户端踢人方式实现
         }
         return filterMap(context, listResult);
     }
