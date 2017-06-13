@@ -365,6 +365,12 @@ public class DaoQuery {
         return qbUserMenu.list();
     }
 
+    /**
+     * 获取已保存用户自定义菜单
+     *
+     * @author tony
+     * @time 2017/6/13 14:26
+     **/
     public List<UserMenu> getSavedUserMenuListOfFavorite(String userName) {
         QueryBuilder qbUserMenu = GreenDaoManager.getInstance().getSession().getUserMenuDao().queryBuilder();
         Join userMenuJoin = qbUserMenu.join(UserMenuDao.Properties.ActivityName, UserFavorite.class, UserFavoriteDao.Properties.MenuName);

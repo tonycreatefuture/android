@@ -60,7 +60,7 @@ public class JsonUtil {
     public static JsonObject getJsonObject(Context context, String xml, String iName, String listKey) {
         String xmlPrefix = context.getResources().getString(R.string.xmlPrefix, iName);
         String xmlPostfix = context.getResources().getString(R.string.xmlPostfix, iName);
-        String json = JsonUtil.xml2JSON(xml, xmlPrefix, xmlPostfix, listKey);
+        String json = xml2JSON(xml, xmlPrefix, xmlPostfix, listKey);
         JsonParser parse = new JsonParser();
         JsonObject jo = parse.parse(json).getAsJsonObject();
         return jo;
